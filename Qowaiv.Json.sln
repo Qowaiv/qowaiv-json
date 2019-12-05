@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{A67B3069-E128-42E2-B7B7-869BDB0BBEDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Text.Json.Serialization", "src\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj", "{66A2BBA8-CCAF-40E6-A898-D4A0A3833D83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{E7FEE4A6-9D3C-4738-A8B4-44A4640D9654}"
+	ProjectSection(SolutionItems) = preProject
+		shared\ConventionBasedSerializer.Initialize.cs = shared\ConventionBasedSerializer.Initialize.cs
+		shared\ConventionBasedSerializer.Serialization.cs = shared\ConventionBasedSerializer.Serialization.cs
+		shared\Guard.cs = shared\Guard.cs
+		shared\ProductInfo.cs = shared\ProductInfo.cs
+		shared\TypeHelper.cs = shared\TypeHelper.cs
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.UnitTests", "test\Qowaiv.Json.UnitTests\Qowaiv.Json.UnitTests.csproj", "{F8326749-3AAB-4722-BA2C-C9A4724AE946}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5FDFA4BE-73B6-4F14-BF57-416EDC2166F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{287CBEFC-F397-4AC5-BDEF-977472B87E68}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		LICENSE.txt = LICENSE.txt
+		Qowaiv.ruleset = Qowaiv.ruleset
+		README.md = README.md
+		ReleaseNotes.md = ReleaseNotes.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{102D34E1-A73A-495E-A5BB-68D7A93E854F}"
+	ProjectSection(SolutionItems) = preProject
+		props\common.props = props\common.props
+		props\nopackage.props = props\nopackage.props
+		props\package.props = props\package.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{6B4A220D-D690-4A44-AD27-1EC2840E501E}"
+	ProjectSection(SolutionItems) = preProject
+		build\Qowaiv.snk = build\Qowaiv.snk
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A67B3069-E128-42E2-B7B7-869BDB0BBEDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67B3069-E128-42E2-B7B7-869BDB0BBEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A67B3069-E128-42E2-B7B7-869BDB0BBEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A67B3069-E128-42E2-B7B7-869BDB0BBEDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66A2BBA8-CCAF-40E6-A898-D4A0A3833D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A2BBA8-CCAF-40E6-A898-D4A0A3833D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A2BBA8-CCAF-40E6-A898-D4A0A3833D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A2BBA8-CCAF-40E6-A898-D4A0A3833D83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8326749-3AAB-4722-BA2C-C9A4724AE946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8326749-3AAB-4722-BA2C-C9A4724AE946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8326749-3AAB-4722-BA2C-C9A4724AE946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8326749-3AAB-4722-BA2C-C9A4724AE946}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F8326749-3AAB-4722-BA2C-C9A4724AE946} = {5FDFA4BE-73B6-4F14-BF57-416EDC2166F8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC82C879-2EFD-4D73-8705-860A9311FAC8}
+	EndGlobalSection
+EndGlobal
