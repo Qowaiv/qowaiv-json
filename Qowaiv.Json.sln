@@ -44,6 +44,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{6B4A220D
 		build\Qowaiv.snk = build\Qowaiv.snk
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6A3758C1-976E-4AAD-851D-86BF6C1E2715}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{540CD5DC-2B21-4235-8327-B91B07C908A9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\test.yaml = .github\workflows\test.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +75,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F8326749-3AAB-4722-BA2C-C9A4724AE946} = {5FDFA4BE-73B6-4F14-BF57-416EDC2166F8}
+		{540CD5DC-2B21-4235-8327-B91B07C908A9} = {6A3758C1-976E-4AAD-851D-86BF6C1E2715}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC82C879-2EFD-4D73-8705-860A9311FAC8}
