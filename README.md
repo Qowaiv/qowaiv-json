@@ -12,7 +12,8 @@
 Serializing data using JSON is de facto the default. However, .NET has no
 generic interface in the standard library to implement.
 
-The solution provided her, is a (naming) convention based one:
+The solution provided here, is a (naming) convention based one, to serialize
+Single Value Objects: Value Objects that can be represented by a single scalar.
 
 1. There should be a public static factory method `FromJson(string)` returning 
    a new instance of the Single Value Object (SVO).
@@ -21,11 +22,35 @@ The solution provided her, is a (naming) convention based one:
 3. If a none `void` method `ToJson()` is provided, this one is used for
    serialization, otherwise `object.ToString()`.
 
+## Sample Single Value Object
+
+``` C#
+public struct /* or class */ SingleValueObject
+{
+    // Required.
+    public static SingleValueObject FromJson(string json);
+
+    // Optional, otherwise FromJson(json.ToString(CultureInfo.Invariant)) is called.
+    public static SingleValueObject FromJson(double json);
+
+    // Optional, otherwise FromJson(json.ToString(CultureInfo.Invariant)) is called.
+    public static SingleValueObject FromJson(long json);
+
+    // Optional, otherwise FromJson(json ? "true": "false") is called.
+    public static SingleValueObject FromJson(bool json);
+
+    // Optional, otherwise ToString()
+    public object /* or string, bool, int, long, double, decimal */ToJson();
+}
+```
+
 ## [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/api/system.text.json)
 Since .NET Core 3.0, Microsoft provides a built-in JSON serialization. To use
 the `Qowaiv.Text.Json.Serialization` package the following code can be used:
 
 ``` C#
+using Qowaiv.Json.Newtonsoft;
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
@@ -51,6 +76,8 @@ QowaivJsonConverter.Register();
 Or, if you work with .NET core Web API:
 
 ``` C#
+using Qowaiv.Text.Json.Serialization;
+
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
