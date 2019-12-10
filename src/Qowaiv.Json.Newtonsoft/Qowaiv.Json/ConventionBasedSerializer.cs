@@ -23,31 +23,19 @@ namespace Qowaiv.Json
 
             try
             {
-                switch (reader.TokenType)
+                return reader.TokenType switch
                 {
                     // Empty value for null-ables.
-                    case JsonToken.Null:
-                        return isNullable ? null : Activator.CreateInstance(objectType);
-
-                    case JsonToken.String:
-                        return fromJsonString((string)reader.Value);
-
-                    case JsonToken.Float:
-                        return fromJsonDouble((double)reader.Value);
-
-                    case JsonToken.Integer:
-                        return fromJsonLong((long)reader.Value);
-
-                    case JsonToken.Boolean:
-                        return fromJsonBool(true.Equals(reader.Value));
-
-                    case JsonToken.Date:
-                        return fromJsonString(((DateTime)reader.Value).ToString(CultureInfo.InvariantCulture));
+                    JsonToken.Null => isNullable ? null : Activator.CreateInstance(objectType),
+                    JsonToken.String => fromJsonString((string)reader.Value),
+                    JsonToken.Float => fromJsonDouble((double)reader.Value),
+                    JsonToken.Integer => fromJsonLong((long)reader.Value),
+                    JsonToken.Boolean => fromJsonBool(true.Equals(reader.Value)),
+                    JsonToken.Date => fromJsonString(((DateTime)reader.Value).ToString(CultureInfo.InvariantCulture)),
 
                     // Other scenario's are not supported.
-                    default:
-                        throw new JsonSerializationException($"Unexpected token parsing {objectType.FullName}. {reader.TokenType} is not supported.");
-                }
+                    _ => throw new JsonSerializationException($"Unexpected token parsing {objectType.FullName}. {reader.TokenType} is not supported."),
+                };
             }
 
             // We want to communicate exceptions as JSON serialization exceptions.
