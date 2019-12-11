@@ -1,0 +1,71 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Globalization;
+
+namespace Qowaiv.Json
+{
+    internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
+    {
+        /// <inheritdoc />
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(TSvo) && TypeIsSupported;
+        }
+
+        /// <inheritdoc />
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            Guard.NotNull(reader, nameof(reader));
+            Guard.NotNull(objectType, nameof(objectType));
+
+            var type = objectType;
+            var isNullable = type != objectType || objectType.IsClass;
+
+            try
+            {
+                return reader.TokenType switch
+                {
+                    // Empty value for null-ables.
+                    JsonToken.Null /*   */ => isNullable ? null : Activator.CreateInstance(objectType),
+                    JsonToken.String /* */ => fromJsonString((string)reader.Value),
+                    JsonToken.Float /*  */ => fromJsonDouble((double)reader.Value),
+                    JsonToken.Integer /**/ => fromJsonLong((long)reader.Value),
+                    JsonToken.Boolean /**/ => fromJsonBool(true.Equals(reader.Value)),
+                    JsonToken.Date /*   */ => fromJsonString(((DateTime)reader.Value).ToString(CultureInfo.InvariantCulture)),
+
+                    // Other scenario's are not supported.
+                    _ => throw new JsonSerializationException($"Unexpected token parsing {objectType.FullName}. {reader.TokenType} is not supported."),
+                };
+            }
+
+            // We want to communicate exceptions as JSON serialization exceptions.
+            catch (Exception x)
+            {
+                if (x is JsonSerializationException || x is JsonReaderException)
+                {
+                    throw;
+                }
+
+                throw new JsonSerializationException(x.Message, x);
+            }
+        }
+
+        /// <inheritdoc />
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            Guard.NotNull(writer, nameof(writer));
+
+            var json = (TSvo)value;
+            var node = ToJson(json);
+
+            if (node is null)
+            {
+                writer.WriteNull();
+            }
+            else
+            {
+                writer.WriteValue(node);
+            }
+        }
+    }
+}

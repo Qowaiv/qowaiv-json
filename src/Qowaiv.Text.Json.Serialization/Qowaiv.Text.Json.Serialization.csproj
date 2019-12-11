@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\props\package.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Version>4.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\shared\ConventionBasedSerializer.Initialize.cs" Link="Qowaiv.Json\ConventionBasedSerializer.Initialize.cs" />
+    <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Json\ConventionBasedSerializer.Serialization.cs" />
+    <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Json\TypeHelper.cs" />
+  </ItemGroup>
+
+</Project>
