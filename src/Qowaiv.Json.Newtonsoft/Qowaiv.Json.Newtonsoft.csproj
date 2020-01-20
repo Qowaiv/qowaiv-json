@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\shared\ConventionBasedSerializer.Initialize.cs" Link="Qowaiv.Json\ConventionBasedSerializer.Initialize.cs" />
-    <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Json\ConventionBasedSerializer.Serialization.cs" />
-    <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Json\TypeHelper.cs" />
+    <Compile Include="..\..\shared\ConventionBasedSerializer.Initialize.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Initialize.cs" />
+    <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Serialization.cs" />
+    <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
   </ItemGroup>
 

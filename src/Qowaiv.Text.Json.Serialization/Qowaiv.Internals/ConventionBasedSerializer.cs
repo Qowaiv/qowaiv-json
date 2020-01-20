@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Qowaiv.Json
+namespace Qowaiv.Internals
 {
     internal partial class ConventionBasedSerializer<TSvo> : JsonConverter<TSvo>
     {

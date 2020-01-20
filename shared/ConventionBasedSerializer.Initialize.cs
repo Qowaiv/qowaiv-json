@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Qowaiv.Json
+namespace Qowaiv.Internals
 {
     internal partial class ConventionBasedSerializer<TSvo>
     {

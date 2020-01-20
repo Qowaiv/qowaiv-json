@@ -1,4 +1,4 @@
-﻿using Qowaiv.Json;
+﻿using Qowaiv.Internals;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;

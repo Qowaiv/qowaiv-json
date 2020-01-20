@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Qowaiv.Json
+namespace Qowaiv.Internals
 {
     internal partial class ConventionBasedSerializer<TSvo>
     {

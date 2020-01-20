@@ -2,7 +2,7 @@
 using System;
 using System.Globalization;
 
-namespace Qowaiv.Json
+namespace Qowaiv.Internals
 {
     internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
     {
