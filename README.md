@@ -56,7 +56,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services
-            .AddMvc()
+            .AddMvc() 
             .AddJsonOptions(options => 
             {
                 options.JsonSerializerOptions.Converters.Add(new QowaivJsonConverter());
@@ -90,4 +90,17 @@ public class Startup
             });
     }
 }
+```
+
+## [MongoDB.Bson](https://mongodb.github.io/mongo-csharp-driver/)
+MongoDB is a cross-platform document-oriented database program. Classified as a
+NoSQL database program, MongoDB uses JSON-like documents with schema. The .NET
+library provides a mechanism to convert objects from and to JSON/BSON. To use
+the `Qowaiv.Bson.MongoDB` package the followinf code can be used:
+
+``` C#
+QowaivBsonConverter.RegisterType(typeof(Uuid));
+QowaivBsonConverter.RegisterType<Uuid>();
+QowaivBsonConverter.RegisterTypes(typeof(Uuid), typeof(Date));
+QowaivBsonConverter.RegisterAssembly(typeof(Uuid));
 ```

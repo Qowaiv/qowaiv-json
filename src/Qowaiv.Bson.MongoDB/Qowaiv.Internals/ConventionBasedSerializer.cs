@@ -36,8 +36,9 @@ namespace Qowaiv.Internals
 
                 case BsonType.Int64:
                     return FromJson(reader.ReadInt64());
-                
+
                 // These values are not supported:
+                //
                 // case BsonType.Decimal128:
                 // case BsonType.EndOfDocument:
                 // case BsonType.Document:
@@ -52,7 +53,6 @@ namespace Qowaiv.Internals
                 // case BsonType.Timestamp:
                 // case BsonType.MinKey:
                 // case BsonType.MaxKey:
-
                 default:
                     throw CreateCannotDeserializeFromBsonTypeException(reader.GetCurrentBsonType());
             }
