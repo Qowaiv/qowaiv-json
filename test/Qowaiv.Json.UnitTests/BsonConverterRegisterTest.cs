@@ -10,7 +10,7 @@ namespace Qowaiv.Json.UnitTests
         [Test]
         public void RegisterAssembly_Qowaiv_SerializesSvoFromAssembly()
         {
-            QowaivBsonConverter.RegisterAssembly(typeof(Date));
+            QowaivBsonConverter.RegisterAssembly(typeof(Date).Assembly);
 
             Assert.AreEqual(@"""2017-06-11""", TestSerializer.BsonSerialize(new Date(2017, 06, 11)));
         }

@@ -9,14 +9,14 @@ namespace Qowaiv.Bson.MongoDB
     public static class QowaivBsonConverter
     {
         /// <summary>Registers all supported types of the assembly.</summary>
-        /// <param name="assemblyType">
-        /// A type that is part of the assembly to register a <see cref="QowaivBsonConverter{TSvo}"/> for.
+        /// <param name="assembly">
+        /// The assembly to register its supported types for.
         /// </param>
-        public static void RegisterAssembly(Type assemblyType)
+        public static void RegisterAssembly(Assembly assembly)
         {
-            Guard.NotNull(assemblyType, nameof(assemblyType));
+            Guard.NotNull(assembly, nameof(assembly));
 
-            foreach (var type in assemblyType.Assembly.GetTypes().Where(NonGeneric))
+            foreach (var type in assembly.GetTypes().Where(NonGeneric))
             {
                 var converter = CreateConverter(type);
                 if (TypeIsSupported(converter))
