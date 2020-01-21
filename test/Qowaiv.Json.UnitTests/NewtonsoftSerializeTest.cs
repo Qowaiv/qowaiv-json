@@ -1,13 +1,12 @@
 ﻿using Newtonsoft.Json;
 using NUnit.Framework;
 using Qowaiv.Json.Newtonsoft;
-using System;
 
 namespace Qowaiv.Json.UnitTests
 {
-    public class NewtonsoftJsonConverterTest : JsonSerializerTestBase<JsonSerializationException>
+    public class NewtonsoftSerializeTest : JsonSerializeTestBase<JsonSerializationException>
     {
-        public NewtonsoftJsonConverterTest()
+        public NewtonsoftSerializeTest()
         {
             if (JsonConvert.DefaultSettings == null)
             {
@@ -30,13 +29,6 @@ namespace Qowaiv.Json.UnitTests
 
             Assert.AreEqual(1, settings.Converters.Count, "Default converters should contain one converter.");
             Assert.AreEqual(typeof(QowaivJsonConverter), settings.Converters[0].GetType(), "Default converters should contain a QowaivJsonConverter.");
-        }
-
-
-        protected override bool CanConvert(Type type)
-        {
-            var converter = new QowaivJsonConverter();
-            return converter.CanConvert(type);
         }
 
         protected override T Deserialize<T>(string jsonString)

@@ -84,7 +84,14 @@ namespace Qowaiv.Internals
             }
             else if (obj is long num)
             {
-                writer.WriteInt64(num);
+                if (num >= int.MinValue && num <= int.MaxValue)
+                {
+                    writer.WriteInt32((int)num);
+                }
+                else
+                {
+                    writer.WriteInt64(num);
+                }
             }
             else if (obj is int int_)
             {

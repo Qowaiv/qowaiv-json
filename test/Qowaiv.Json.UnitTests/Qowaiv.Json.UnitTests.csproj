@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Qowaiv.Bson.MongoDB\Qowaiv.Bson.MongoDB.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj" />
   </ItemGroup>
