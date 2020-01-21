@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
+using Qowaiv.Internals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Qowaiv.Json.Newtonsoft
 {
-    /// <summary>The Qowaiv JSON converter converts types from and to JSON that implement the Qowaiv.Json.IJsonSerializable.</summary>
+    /// <summary>A JSON converter that converts Single Value Objects based on naming conventions.</summary>
     public class QowaivJsonConverter : JsonConverter
     {
         /// <summary>Registers the Qowaiv JSON converter.</summary>

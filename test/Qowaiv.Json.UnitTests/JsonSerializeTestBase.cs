@@ -8,56 +8,8 @@ namespace Qowaiv.Json.UnitTests
     /// This abstract base class should help to guarantee that different
     /// implementations have the same behaviour.
     /// </remarks>
-    public abstract class JsonSerializerTestBase<TException>  where TException: Exception
+    public abstract class JsonSerializeTestBase<TException>  where TException: Exception
     {
-        [Test]
-        public void CanConvert_Null_False()
-        {
-            Assert.IsFalse(CanConvert(null));
-        }
-
-        [Test]
-        public void CanConvert_Object_False()
-        {
-            Assert.IsFalse(CanConvert(typeof(object)));
-        }
-
-        [Test]
-        public void CanConvert_Int32_False()
-        {
-            Assert.IsFalse(CanConvert(typeof(int)));
-        }
-
-        [Test]
-        public void CanConvert_SvoWithFromJsonBoolOnly_False()
-        {
-            Assert.IsFalse(CanConvert(typeof(SvoWithFromJsonBoolOnly)));
-        }
-
-        [Test]
-        public void CanConvert_SvoWithFromJsonStringOnly_True()
-        {
-            Assert.IsTrue(CanConvert(typeof(SvoWithFromJsonStringOnly)));
-        }
-
-        [Test]
-        public void CanConvert_SvoWithFromJson_True()
-        {
-            Assert.IsTrue(CanConvert(typeof(SvoWithFromJson)));
-        }
-
-        [Test]
-        public void CanConvert_NullableSvoWithFromJson_True()
-        {
-            Assert.IsTrue(CanConvert(typeof(SvoWithFromJson?)));
-        }
-
-        [Test]
-        public void CanConvert_SvoWithFromJsonClass_True()
-        {
-            Assert.IsTrue(CanConvert(typeof(SvoWithFromJsonClass)));
-        }
-
         [Test]
         public void Deserialize_Null_Successful()
         {
@@ -124,10 +76,10 @@ namespace Qowaiv.Json.UnitTests
         [Test]
         public void Deserialize_Object_Succesful()
         {
-            var json = @"{ ""Id"": 3, ""Svo"": 2017, ""Message"": ""Hello World!"" }";
+            var json = @"{ ""Identifier"": 3, ""Svo"": 2017, ""Message"": ""Hello World!"" }";
             var dto = Deserialize<DtoClass>(json);
 
-            Assert.AreEqual(3, dto.Id);
+            Assert.AreEqual(3, dto.Identifier);
             Assert.AreEqual(new SvoWithFromJson(2017L), dto.Svo);
             Assert.AreEqual("Hello World!", dto.Message);
         }
@@ -182,13 +134,11 @@ namespace Qowaiv.Json.UnitTests
         }
 
         [Test]
-        public void Serialize_DateTime_Successful()
+        public virtual void Serialize_DateTime_Successful()
         {
             var json = Serialize(new SvoWithFromJson(new DateTime(2017, 06, 11)));
             Assert.AreEqual(@"""2017-06-11T00:00:00""", json);
         }
-
-        protected abstract bool CanConvert(Type type);
 
         protected abstract T Deserialize<T>(string jsonString);
 

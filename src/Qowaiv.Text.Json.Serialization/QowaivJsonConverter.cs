@@ -1,4 +1,4 @@
-﻿using Qowaiv.Json;
+﻿using Qowaiv.Internals;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Qowaiv.Text.Json.Serialization
 {
-    /// <summary>The Qowaiv JSON converter converts types .</summary>
+    /// <summary>A JSON converter that converts Single Value Objects based on naming conventions.</summary>
     public class QowaivJsonConverter : JsonConverterFactory
     {
         /// <inheritdoc />
