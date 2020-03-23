@@ -1,6 +1,6 @@
 ﻿namespace Qowaiv.Json.UnitTests.Models
 {
-    internal struct SvoWithFromJson : System.IEquatable<SvoWithFromJson>
+    internal readonly struct SvoWithFromJson : System.IEquatable<SvoWithFromJson>
     {
         public SvoWithFromJson(object value) => Value = value;
         public object Value { get; }
