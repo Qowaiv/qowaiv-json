@@ -85,6 +85,18 @@ namespace Qowaiv.Json.UnitTests
         }
 
         [Test]
+        public void Deserialize_DtoWithNullSvo_Succesful()
+        {
+            var json = @"{ ""Identifier"": 3, ""Svo"": null, ""Message"": ""Hello World!"" }";
+            var dto = Deserialize<DtoClass>(json);
+
+            Assert.AreEqual(3, dto.Identifier);
+            Assert.AreEqual(default(SvoWithFromJson), dto.Svo);
+            Assert.AreEqual("Hello World!", dto.Message);
+        }
+
+
+        [Test]
         public void Deserialize_NotSupported_Throws()
         {
             var x = Assert.Throws<TException>(() => Deserialize<SvoThatThrows>(@"""test"""));

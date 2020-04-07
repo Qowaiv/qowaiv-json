@@ -19,6 +19,8 @@ namespace Qowaiv.Internals
             switch (bsonType)
             {
                 case BsonType.Null:
+                    // consume and ignore.
+                    reader.SkipValue();
                     return default;
 
                 case BsonType.DateTime:

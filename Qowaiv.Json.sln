@@ -48,10 +48,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6A37
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{540CD5DC-2B21-4235-8327-B91B07C908A9}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\test.yaml = .github\workflows\test.yaml
+		.github\workflows\build-test.yaml = .github\workflows\build-test.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Bson.MongoDB", "src\Qowaiv.Bson.MongoDB\Qowaiv.Bson.MongoDB.csproj", "{33601DB6-1C23-4359-B228-480446C952CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Bson.MongoDB", "src\Qowaiv.Bson.MongoDB\Qowaiv.Bson.MongoDB.csproj", "{33601DB6-1C23-4359-B228-480446C952CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
