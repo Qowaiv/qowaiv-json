@@ -10,8 +10,8 @@
 |![v](https://img.shields.io/badge/version-4.0.1-blue.svg?cacheSeconds=3600)|[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                      |
 
 # Qowaiv JSON
-Serializing data using JSON is _de facto_ the default. However, .NET has no
-generic interface in the standard library to implement.
+Serializing data using JSON is common practice. However, .NET has no generic
+interface in the standard library to implement.
 
 The solution provided here, is a (naming) convention based one, to serialize
 Single Value Objects: Value Objects that can be represented by a single scalar.
