@@ -7,10 +7,10 @@
 |---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 |![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                |
 |![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)|
-|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                      |
+|![v](https://img.shields.io/badge/version-4.0.1-blue.svg?cacheSeconds=3600)|[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                      |
 
 # Qowaiv JSON
-Serializing data using JSON is de facto the default. However, .NET has no
+Serializing data using JSON is _de facto_ the default. However, .NET has no
 generic interface in the standard library to implement.
 
 The solution provided here, is a (naming) convention based one, to serialize
