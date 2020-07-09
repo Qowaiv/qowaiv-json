@@ -50,7 +50,7 @@ Since .NET Core 3.0, Microsoft provides a built-in JSON serialization. To use
 the `Qowaiv.Text.Json.Serialization` package the following code can be used:
 
 ``` C#
-using Qowaiv.Json.Newtonsoft;
+using Qowaiv.Text.Json.Serialization;
 
 public class Startup
 {
@@ -76,8 +76,14 @@ QowaivJsonConverter.Register();
 
 Or, if you work with .NET core Web API:
 
+NuGet:
+```
+Install-Package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+```
+
+Startup.cs:
 ``` C#
-using Qowaiv.Text.Json.Serialization;
+using Qowaiv.Json.Newtonsoft;
 
 public class Startup
 {
@@ -85,7 +91,7 @@ public class Startup
     {
         services
             .AddMvc()
-            .AddJsonOptions(options => 
+            .AddNewtonsoftJson(options => 
             {
                 options.SerializerSettings.Converters.Add(new QowaivJsonConverter());
             });
