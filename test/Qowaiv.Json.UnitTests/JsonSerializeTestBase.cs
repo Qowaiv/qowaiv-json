@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Qowaiv.Identifiers;
 using Qowaiv.Json.UnitTests.Models;
 using System;
 
@@ -74,7 +75,7 @@ namespace Qowaiv.Json.UnitTests
         }
 
         [Test]
-        public void Deserialize_Object_Succesful()
+        public void Deserialize_Object_Successful()
         {
             var json = @"{ ""Identifier"": 3, ""Svo"": 2017, ""Message"": ""Hello World!"" }";
             var dto = Deserialize<DtoClass>(json);
@@ -85,7 +86,7 @@ namespace Qowaiv.Json.UnitTests
         }
 
         [Test]
-        public void Deserialize_DtoWithNullSvo_Succesful()
+        public void Deserialize_DtoWithNullSvo_Successful()
         {
             var json = @"{ ""Identifier"": 3, ""Svo"": null, ""Message"": ""Hello World!"" }";
             var dto = Deserialize<DtoClass>(json);
@@ -95,6 +96,12 @@ namespace Qowaiv.Json.UnitTests
             Assert.AreEqual("Hello World!", dto.Message);
         }
 
+        [Test]
+        public void Deserialize_GenericId_Successful()
+        {
+            var id = Deserialize<Id<ForGeneric>>("12");
+            Assert.AreEqual(Id<ForGeneric>.Create(12), id);
+        }
 
         [Test]
         public void Deserialize_NotSupported_Throws()
@@ -143,6 +150,13 @@ namespace Qowaiv.Json.UnitTests
         {
             var json = Serialize(new SvoWithFromJson(2.5m));
             Assert.AreEqual(@"2.5", json);
+        }
+
+        [Test]
+        public void Serialize_GenericId_Successful()
+        {
+            var json = Serialize(Id<ForGeneric>.Create(12));
+            Assert.AreEqual(@"12", json);
         }
 
         [Test]
