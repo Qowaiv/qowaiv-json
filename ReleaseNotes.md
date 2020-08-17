@@ -1,4 +1,7 @@
 ﻿# Release Notes
+## Release 2020-08-17
+### Qowaiv.Bson.MongoDB 4.0.2
+* Only register exported. #4
 
 ## Release 2020-04-07
 ### Qowaiv.Bson.MongoDB 4.0.1

@@ -16,7 +16,7 @@ namespace Qowaiv.Bson.MongoDB
         {
             Guard.NotNull(assembly, nameof(assembly));
 
-            foreach (var type in assembly.GetTypes().Where(NonGeneric))
+            foreach (var type in assembly.GetExportedTypes().Where(Supported))
             {
                 var converter = CreateConverter(type);
                 if (TypeIsSupported(converter))
@@ -64,21 +64,18 @@ namespace Qowaiv.Bson.MongoDB
 
         /// <summary>Guard that the converter actually supports conversion based on conventions.</summary>
         private static IBsonSerializer GuardType(IBsonSerializer converter)
-        {
-            if (!TypeIsSupported(converter))
-            {
-                throw new NotSupportedException();
-            }
-
-            return converter;
-        }
+            => TypeIsSupported(converter)
+            ? converter
+            : throw new NotSupportedException();
 
         /// <summary>Returns true if a name based convention is supported.</summary>
         private static bool TypeIsSupported(IBsonSerializer converter)
-        {
-            var info = converter.GetType().GetProperty(nameof(QowaivBsonConverter<object>.TypeIsSupported), BindingFlags.Instance | BindingFlags.NonPublic);
-            return (bool)info.GetValue(converter, Array.Empty<object>());
-        }
+        => (bool)converter
+            .GetType()
+            .GetProperty(
+                nameof(QowaivBsonConverter<object>.TypeIsSupported),
+                BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetValue(converter, Array.Empty<object>());
 
         /// <summary>Creates an instance of <see cref="QowaivBsonConverter{TSvo}"/> based on the specified type.</summary>
         private static IBsonSerializer CreateConverter(Type type)
@@ -89,9 +86,9 @@ namespace Qowaiv.Bson.MongoDB
         }
 
         /// <summary><see cref="BsonSerializer"/> only support non-generic types.</summary>
-        private static bool NonGeneric(Type type)
-        {
-            return !type.IsGenericType && !type.ContainsGenericParameters;
-        }
+        private static bool Supported(Type type)
+            => !type.IsGenericType
+            && !type.ContainsGenericParameters
+            && !type.IsGenericTypeDefinition;
     }
 }
