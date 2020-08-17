@@ -73,7 +73,7 @@ namespace Qowaiv.Bson.MongoDB
         => (bool)converter
             .GetType()
             .GetProperty(
-                nameof(QowaivBsonConverter<object>.TypeIsSupported), 
+                nameof(QowaivBsonConverter<object>.TypeIsSupported),
                 BindingFlags.Instance | BindingFlags.NonPublic)
             .GetValue(converter, Array.Empty<object>());
 
