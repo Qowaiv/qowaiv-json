@@ -18,8 +18,7 @@ namespace Qowaiv.Internals
         {
             var factories = SvoType
                 .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(IsFactory)
-            ;
+                .Where(IsFactory);
 
             foreach (var factory in factories)
             {
@@ -43,56 +42,38 @@ namespace Qowaiv.Internals
                 }
             }
 
-            if (fromJsonString is null)
+            if (fromJsonString is { })
             {
-                return;
-            }
+                fromJsonDouble ??= (num) => fromJsonString(num.ToString(CultureInfo.InvariantCulture));
+                fromJsonLong ??= (num) => fromJsonString(num.ToString(CultureInfo.InvariantCulture));
+                fromJsonBool ??= (b) => fromJsonString(b ? "true" : "false");
 
-            if (fromJsonDouble is null)
-            {
-                fromJsonDouble = (num) => fromJsonString(num.ToString(CultureInfo.InvariantCulture));
-            }
+                var toJson = SvoType
+                    .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                    .FirstOrDefault(IsToJson);
 
-            if (fromJsonLong is null)
-            {
-                fromJsonLong = (num) => fromJsonString(num.ToString(CultureInfo.InvariantCulture));
+                toJsonObject = CompileSerialize(toJson);
             }
-
-            if (fromJsonBool is null)
-            {
-                fromJsonBool = (b) => fromJsonString(b ? "true" : "false");
-            }
-
-            var toJson = SvoType
-                .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .FirstOrDefault(IsToJson)
-            ;
-            toJsonObject = CompileSerialize(toJson);
         }
 
         private bool IsFactory(MethodInfo method)
-        {
-            return method.ReturnType == SvoType
-                && method.Name == nameof(ConventionBasedSerializer<object>.FromJson)
-                && method.GetParameters().Length == 1
-                && NodeTypes.Contains(method.GetParameters()[0].ParameterType)
-            ;
-        }
+            => method.ReturnType == SvoType
+            && method.Name == nameof(ConventionBasedSerializer<object>.FromJson)
+            && method.GetParameters().Length == 1
+            && NodeTypes.Contains(method.GetParameters()[0].ParameterType);
 
         private static bool IsToJson(MethodInfo method)
-        {
-            return method.Name == nameof(ConventionBasedSerializer<object>.ToJson)
-                && method.GetParameters().Length == 0
-                && method.ReturnType != null;
-        }
+            => method.Name == nameof(ConventionBasedSerializer<object>.ToJson)
+            && method.GetParameters().Length == 0
+            && method.ReturnType != null;
 
         private Func<TSvo, object> CompileSerialize(MethodInfo method)
         {
             var toJson = method ?? typeof(object).GetMethod(nameof(ToString));
             var svo = Expression.Parameter(typeof(TSvo), "svo");
-            var par = SvoType != typeof(TSvo)
-                ? Expression.Convert(svo, SvoType)
-                : (Expression)svo;
+            var par = SvoType == typeof(TSvo)
+                ? (Expression)svo
+                : Expression.Convert(svo, SvoType);
 
             Expression body = Expression.Call(par, toJson);
 
@@ -103,7 +84,6 @@ namespace Qowaiv.Internals
             }
 
             var expression = Expression.Lambda<Func<TSvo, object>>(body, svo);
-
             return expression.Compile();
         }
 
