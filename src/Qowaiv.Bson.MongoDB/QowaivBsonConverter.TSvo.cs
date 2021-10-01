@@ -10,19 +10,15 @@ namespace Qowaiv.Bson.MongoDB
     /// </typeparam>
     public class QowaivBsonConverter<TSvo> : SerializerBase<TSvo>
     {
-        private readonly ConventionBasedSerializer<TSvo> serializer = new ConventionBasedSerializer<TSvo>();
+        private readonly ConventionBasedSerializer<TSvo> serializer = new();
 
         /// <inheritdoc/>
         public override TSvo Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
-        {
-            return serializer.Deserialize(context, args);
-        }
+            => serializer.Deserialize(context, args);
 
         /// <inheritdoc/>
         public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TSvo value)
-        {
-            serializer.Serialize(context, args, value);
-        }
+            => serializer.Serialize(context, args, value);
 
         /// <summary>Returns true if <typeparamref name="TSvo"/> is supported.</summary>
         internal bool TypeIsSupported => serializer.TypeIsSupported;

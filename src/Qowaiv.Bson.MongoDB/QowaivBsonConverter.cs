@@ -14,12 +14,9 @@ namespace Qowaiv.Bson.MongoDB
         /// </param>
         public static void RegisterAssembly(Assembly assembly)
         {
-            Guard.NotNull(assembly, nameof(assembly));
-
-            foreach (var type in TypeHelper.GetCandidateTypes(assembly.GetExportedTypes()))
+            foreach (var type in TypeHelper.GetCandidateTypes(Guard.NotNull(assembly, nameof(assembly)).GetExportedTypes()))
             {
-                var converter = CreateConverter(type);
-                if (TypeIsSupported(converter))
+                if (CreateConverter(type) is var converter && TypeIsSupported(converter))
                 {
                     BsonSerializer.RegisterSerializer(type, converter);
                 }
@@ -32,9 +29,7 @@ namespace Qowaiv.Bson.MongoDB
         /// </param>
         public static void RegisterTypes(params Type[] types)
         {
-            Guard.HasAny(types, nameof(types));
-
-            foreach (var type in types)
+            foreach (var type in Guard.HasAny(types, nameof(types)))
             {
                 RegisterType(type);
             }
@@ -64,13 +59,11 @@ namespace Qowaiv.Bson.MongoDB
 
         /// <summary>Guard that the converter actually supports conversion based on conventions.</summary>
         private static IBsonSerializer GuardType(IBsonSerializer converter)
-            => TypeIsSupported(converter)
-            ? converter
-            : throw new NotSupportedException();
+            => TypeIsSupported(converter) ? converter : throw new NotSupportedException();
 
         /// <summary>Returns true if a name based convention is supported.</summary>
         private static bool TypeIsSupported(IBsonSerializer converter)
-        => (bool)converter
+            => (bool)converter
             .GetType()
             .GetProperty(
                 nameof(QowaivBsonConverter<object>.TypeIsSupported),
@@ -81,8 +74,7 @@ namespace Qowaiv.Bson.MongoDB
         private static IBsonSerializer CreateConverter(Type type)
         {
             var converterType = typeof(QowaivBsonConverter<>).MakeGenericType(type);
-            var converter = (IBsonSerializer)Activator.CreateInstance(converterType);
-            return converter;
+            return (IBsonSerializer)Activator.CreateInstance(converterType);
         }
     }
 }
