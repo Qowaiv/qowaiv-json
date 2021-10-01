@@ -12,7 +12,7 @@ namespace Qowaiv.Internals
         private static readonly Type[] NodeTypes = new[] { typeof(string), typeof(double), typeof(long), typeof(bool) };
 #pragma warning restore S2743 // Static fields should not be used in generic types
 
-        private Type SvoType { get; } = TypeHelper.GetNotNullableType(typeof(TSvo));
+        private Type SvoType { get; } = TypeHelper.NotNullable(typeof(TSvo));
 
         private void Initialize()
         {

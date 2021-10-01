@@ -3,7 +3,6 @@ using NUnit.Framework;
 using Qowaiv;
 using Qowaiv.Identifiers;
 using Qowaiv.Internals;
-using System;
 using System.Collections.Generic;
 
 namespace TypeHelper_specs

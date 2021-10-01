@@ -11,16 +11,14 @@ namespace Qowaiv.Text.Json.Serialization
     {
         /// <inheritdoc />
         public override bool CanConvert(Type typeToConvert)
-        {
-            return typeToConvert != null
-                && !TypeHelper.GetNotNullableType(typeToConvert).IsPrimitive
-                && CreateConverter(typeToConvert, null) != null;
-        }
+            => typeToConvert is { }
+            && !TypeHelper.NotNullable(typeToConvert).IsPrimitive
+            && CreateConverter(typeToConvert, null) is { };
 
         /// <inheritdoc />
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
-            var type = TypeHelper.GetNotNullableType(typeToConvert);
+            var type = TypeHelper.NotNullable(typeToConvert);
 
             if (notSupported.Contains(type))
             {
@@ -52,8 +50,8 @@ namespace Qowaiv.Text.Json.Serialization
             return converter;
         }
 
-        private readonly object locker = new object();
-        private readonly Dictionary<Type, JsonConverter> converters = new Dictionary<Type, JsonConverter>();
-        private readonly HashSet<Type> notSupported = new HashSet<Type>();
+        private readonly object locker = new();
+        private readonly Dictionary<Type, JsonConverter> converters = new();
+        private readonly HashSet<Type> notSupported = new();
     }
 }
