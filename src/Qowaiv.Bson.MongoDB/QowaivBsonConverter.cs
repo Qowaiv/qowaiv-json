@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization;
+using Qowaiv.Internals;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +17,7 @@ namespace Qowaiv.Bson.MongoDB
         {
             Guard.NotNull(assembly, nameof(assembly));
 
-            foreach (var type in assembly.GetExportedTypes().Where(Supported))
+            foreach (var type in TypeHelper.GetCandidateTypes(assembly.GetExportedTypes()))
             {
                 var converter = CreateConverter(type);
                 if (TypeIsSupported(converter))
@@ -84,11 +85,5 @@ namespace Qowaiv.Bson.MongoDB
             var converter = (IBsonSerializer)Activator.CreateInstance(converterType);
             return converter;
         }
-
-        /// <summary><see cref="BsonSerializer"/> only support non-generic types.</summary>
-        private static bool Supported(Type type)
-            => !type.IsGenericType
-            && !type.ContainsGenericParameters
-            && !type.IsGenericTypeDefinition;
     }
 }
