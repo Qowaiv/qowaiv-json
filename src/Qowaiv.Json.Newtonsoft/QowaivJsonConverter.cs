@@ -29,7 +29,7 @@ namespace Qowaiv.Json.Newtonsoft
         /// <inheritdoc />
         public override bool CanConvert(Type objectType)
         {
-            var type = TypeHelper.GetNotNullableType(objectType);
+            var type = TypeHelper.NotNullable(objectType);
             return type != null
                 && !type.IsPrimitive
                 && CreateConverter(type) != null;
@@ -53,7 +53,7 @@ namespace Qowaiv.Json.Newtonsoft
 
         private JsonConverter CreateConverter(Type objectType)
         {
-            var type = TypeHelper.GetNotNullableType(objectType);
+            var type = TypeHelper.NotNullable(objectType);
 
             if (notSupported.Contains(type))
             {
