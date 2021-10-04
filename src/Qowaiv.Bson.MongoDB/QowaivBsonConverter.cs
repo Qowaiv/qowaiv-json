@@ -65,9 +65,7 @@ namespace Qowaiv.Bson.MongoDB
         private static bool TypeIsSupported(IBsonSerializer converter)
             => (bool)converter
             .GetType()
-            .GetProperty(
-                nameof(QowaivBsonConverter<object>.TypeIsSupported),
-                BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetProperty(nameof(QowaivBsonConverter<object>.TypeIsSupported), NonPublicInstance)
             .GetValue(converter, Array.Empty<object>());
 
         /// <summary>Creates an instance of <see cref="QowaivBsonConverter{TSvo}"/> based on the specified type.</summary>
@@ -76,5 +74,7 @@ namespace Qowaiv.Bson.MongoDB
             var converterType = typeof(QowaivBsonConverter<>).MakeGenericType(type);
             return (IBsonSerializer)Activator.CreateInstance(converterType);
         }
+
+        private const BindingFlags NonPublicInstance = (BindingFlags)36;
     }
 }
