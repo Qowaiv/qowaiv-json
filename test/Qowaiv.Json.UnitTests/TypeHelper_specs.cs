@@ -55,6 +55,8 @@ namespace TypeHelper_specs
 
     public sealed class SomeBehavior : UuidBehavior { }
 
+#pragma warning disable S3453 // Classes should not have only "private" constructors
+    // The behavior we want to test.
     public sealed class BehaviorWithoutCtor : UuidBehavior
     {
         private BehaviorWithoutCtor() { }

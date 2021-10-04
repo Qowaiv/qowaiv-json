@@ -4,13 +4,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>4.0.2</Version>
+    <Version>4.1.0</Version>
+    <PackageIcon>package-icon-bson.png</PackageIcon>
     <PackageReleaseNotes>
-      v4.0.2
-      - Only register exported.
+v4.1.0
+- Registered IIdentifierBehavior as Id&lt;TBehavior&gt; #7
 
-      v4.0.1
-      - Fix reading null nodes.
+v4.0.2
+- Only register exported.
+
+v4.0.1
+- Fix reading null nodes.
     </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -19,6 +23,8 @@
     <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Serialization.cs" />
     <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+    <None Include="package-icon-bson.png" Pack="true" PackagePath="" />
+    <None Remove="..\..\design\package-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
