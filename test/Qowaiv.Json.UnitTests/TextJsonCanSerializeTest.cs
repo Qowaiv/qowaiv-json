@@ -1,14 +1,13 @@
 ﻿using Qowaiv.Text.Json.Serialization;
 using System;
 
-namespace Qowaiv.Json.UnitTests
+namespace Qowaiv.Json.UnitTests;
+
+public class TextJsonCanSerializeTest : JsonCanConvertTestBase
 {
-    public class TextJsonCanSerializeTest : JsonCanConvertTestBase
+    protected override bool CanConvert(Type type)
     {
-        protected override bool CanConvert(Type type)
-        {
-            var factory = new QowaivJsonConverter();
-            return factory.CanConvert(type);
-        }
+        var factory = new QowaivJsonConverter();
+        return factory.CanConvert(type);
     }
 }

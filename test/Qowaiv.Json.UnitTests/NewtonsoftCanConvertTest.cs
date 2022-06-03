@@ -1,14 +1,13 @@
 ﻿using Qowaiv.Json.Newtonsoft;
 using System;
 
-namespace Qowaiv.Json.UnitTests
+namespace Qowaiv.Json.UnitTests;
+
+public class NewtonsoftCanConvertTest : JsonCanConvertTestBase
 {
-    public class NewtonsoftCanConvertTest : JsonCanConvertTestBase
+    protected override bool CanConvert(Type type)
     {
-        protected override bool CanConvert(Type type)
-        {
-            var converter = new QowaivJsonConverter();
-            return converter.CanConvert(type);
-        }
+        var converter = new QowaivJsonConverter();
+        return converter.CanConvert(type);
     }
 }
