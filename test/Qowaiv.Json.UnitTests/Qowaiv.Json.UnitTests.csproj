@@ -3,8 +3,7 @@
   <Import Project="..\..\props\nopackage.props" />
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,13 +26,6 @@
     <ProjectReference Include="..\..\src\Qowaiv.Bson.MongoDB\Qowaiv.Bson.MongoDB.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj" />
     <ProjectReference Include="..\..\src\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="SonarAnalyzer.CSharp" Version="8.29.0.36737">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>

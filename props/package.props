@@ -18,14 +18,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCop" Version="6.2.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <NoWarn>NU1701</NoWarn>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <!-- Shared assembly tags. -->
     <Compile Include="$(MSBuildThisFileDirectory)..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
     <!-- Package icon. -->
