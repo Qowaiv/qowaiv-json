@@ -5,9 +5,9 @@
 
 | version                                                                   | package                                                                                        |
 |---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                |
-|![v](https://img.shields.io/badge/version-4.0.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)|
-|![v](https://img.shields.io/badge/version-4.1.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                      |
+|![v](https://img.shields.io/badge/version-4.2.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                |
+|![v](https://img.shields.io/badge/version-4.2.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)|
+|![v](https://img.shields.io/badge/version-4.2.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                      |
 
 # Qowaiv JSON
 Serializing data using JSON is common practice. However, .NET has no generic
