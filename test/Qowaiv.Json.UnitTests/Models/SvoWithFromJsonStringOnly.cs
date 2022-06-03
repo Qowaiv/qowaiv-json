@@ -4,5 +4,5 @@ namespace Qowaiv.Json.UnitTests.Models;
 
 internal struct SvoWithFromJsonStringOnly
 {
-    public static SvoWithFromJsonStringOnly FromJson(string json) => default;
+    public static SvoWithFromJsonStringOnly FromJson(string _) => default;
 }
