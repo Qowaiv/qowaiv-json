@@ -15,7 +15,7 @@ public class BsonMongoDBSerializeTest : JsonSerializeTestBase<FormatException>
         QowaivBsonConverter.RegisterType<SvoWithFromJson>();
         QowaivBsonConverter.RegisterType<SvoWithFromJsonClass>();
         QowaivBsonConverter.RegisterType<SvoWithFromJsonStringOnly>();
-        QowaivBsonConverter.RegisterType<Identifiers.Id<ForGeneric>>();
+        QowaivBsonConverter.RegisterType<Qowaiv.Identifiers.Id<ForGeneric>>();
     }
 
     [Test, Ignore("For BSON a Date() is generated, that is default behaviour we don't want to interfere with.")]

@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ internal static class TypeHelper
     /// <param name="objectType">
     /// The type to test for.
     /// </param>
-    public static Type NotNullable(Type objectType)
+    public static Type? NotNullable(Type? objectType)
         => objectType is { } ? Nullable.GetUnderlyingType(objectType) ?? objectType : null;
 
     /// <summary>Gets the candidate types.</summary>
@@ -19,30 +21,58 @@ internal static class TypeHelper
     /// The types to select from.
     /// </param>
     public static IEnumerable<Type> GetCandidateTypes(IEnumerable<Type> types)
-        => types.Where(IsSupported)
-        .Select(type => IsIdBehavior(type) ? CreateIdType(type) : type);
-
-    /// <summary>Returns true if the type implements <see cref="BehaviorType"/> and can be initiated.</summary>
-    /// <param name="type">
-    /// The type to test for.
-    /// </param>
-    public static bool IsIdBehavior(Type type)
-        => !type.IsAbstract
-        && type.GetInterfaces().Any(i => i.FullName == BehaviorType)
-        && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
-
-    private static Type CreateIdType(Type behavior)
     {
-        var type = Type.GetType(IdType);
-        return type?.MakeGenericType(behavior);
+        return types.Where(IsSupported).Select(Transform);
+
+        static bool IsSupported(Type type)
+            => !type.IsAbstract
+            && !type.IsGenericType
+            && !type.ContainsGenericParameters
+            && !type.IsGenericTypeDefinition;
+
+        static Type Transform(Type type)
+            => IdBehavior(type)
+            ?? SvoBehavior(type)
+            ?? type;
     }
 
-    private static bool IsSupported(Type type)
-        => !type.IsAbstract
-        && !type.IsGenericType
-        && !type.ContainsGenericParameters
-        && !type.IsGenericTypeDefinition;
+    public static Type? IdBehavior(Type type)
+        => Id.Is(type)
+        ? Type.GetType(Id.Generic)?.MakeGenericType(type)
+        : null;
 
-    private const string IdType = "Qowaiv.Identifiers.Id`1, Qowaiv";
-    private const string BehaviorType = "Qowaiv.Identifiers.IIdentifierBehavior";
+    public static Type? SvoBehavior(Type type)
+        => Svo.Is(type)
+        ? Type.GetType(Svo.Generic)?.MakeGenericType(type)
+        : null;
+
+    private static class Id
+    {
+        public static bool Is(Type type)
+            => type.GetInterfaces().Any(i => i.FullName == Behavior)
+            && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
+
+        public const string Generic = "Qowaiv.Identifiers.Id`1, Qowaiv";
+        public const string Behavior = "Qowaiv.Identifiers.IIdentifierBehavior";
+    }
+
+    private static class Svo
+    {
+        public static bool Is(Type type)
+           => type.BaseTypes().Any(i => i.FullName == Behavior)
+           && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
+
+        public const string Generic = "Qowaiv.Customization.Svo`1, Qowaiv";
+        public const string Behavior = "Qowaiv.Customization.SvoBehavior";
+    }
+
+    static IEnumerable<Type> BaseTypes(this Type type)
+    {
+        var current = type.BaseType;
+        while(current is { })
+        {
+            yield return current;
+            current = current.BaseType;
+        }
+    }
 }
