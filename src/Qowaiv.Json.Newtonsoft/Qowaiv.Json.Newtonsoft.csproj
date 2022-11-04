@@ -5,6 +5,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
     <Version>4.2.0</Version>
+    <PackageReleaseNotes>
+v4.2.0
+- Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
+    </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
