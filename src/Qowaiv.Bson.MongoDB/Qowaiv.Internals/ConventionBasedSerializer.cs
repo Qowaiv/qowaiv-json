@@ -4,117 +4,116 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 
-namespace Qowaiv.Internals
+namespace Qowaiv.Internals;
+
+internal partial class ConventionBasedSerializer<TSvo> : SerializerBase<TSvo>
 {
-    internal partial class ConventionBasedSerializer<TSvo> : SerializerBase<TSvo>
+    /// <inheritdoc/>
+    public override TSvo Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
     {
-        /// <inheritdoc/>
-        public override TSvo Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        Guard.NotNull(context, nameof(context));
+
+        var reader = context.Reader;
+        var bsonType = reader.GetCurrentBsonType();
+
+        switch (bsonType)
         {
-            Guard.NotNull(context, nameof(context));
+            case BsonType.Null:
+                // consume and ignore.
+                reader.SkipValue();
+                return default;
 
-            var reader = context.Reader;
-            var bsonType = reader.GetCurrentBsonType();
+            case BsonType.DateTime:
+            case BsonType.String:
+                return FromJson(reader.ReadString());
 
-            switch (bsonType)
-            {
-                case BsonType.Null:
-                    // consume and ignore.
-                    reader.SkipValue();
-                    return default;
+            case BsonType.Double:
+                return FromJson(reader.ReadDouble());
 
-                case BsonType.DateTime:
-                case BsonType.String:
-                    return FromJson(reader.ReadString());
+            case BsonType.Boolean:
+                return FromJson(reader.ReadBoolean());
 
-                case BsonType.Double:
-                    return FromJson(reader.ReadDouble());
+            case BsonType.Int32:
+                return FromJson(reader.ReadInt32());
 
-                case BsonType.Boolean:
-                    return FromJson(reader.ReadBoolean());
+            case BsonType.Int64:
+                return FromJson(reader.ReadInt64());
 
-                case BsonType.Int32:
-                    return FromJson(reader.ReadInt32());
-
-                case BsonType.Int64:
-                    return FromJson(reader.ReadInt64());
-
-                // These values are not supported:
-                //
-                // case BsonType.Decimal128:
-                // case BsonType.EndOfDocument:
-                // case BsonType.Document:
-                // case BsonType.Array:
-                // case BsonType.Binary:
-                // case BsonType.Undefined:
-                // case BsonType.ObjectId:
-                // case BsonType.RegularExpression:
-                // case BsonType.JavaScript:
-                // case BsonType.Symbol:
-                // case BsonType.JavaScriptWithScope:
-                // case BsonType.Timestamp:
-                // case BsonType.MinKey:
-                // case BsonType.MaxKey:
-                default:
-                    throw CreateCannotDeserializeFromBsonTypeException(reader.GetCurrentBsonType());
-            }
+            // These values are not supported:
+            //
+            // case BsonType.Decimal128:
+            // case BsonType.EndOfDocument:
+            // case BsonType.Document:
+            // case BsonType.Array:
+            // case BsonType.Binary:
+            // case BsonType.Undefined:
+            // case BsonType.ObjectId:
+            // case BsonType.RegularExpression:
+            // case BsonType.JavaScript:
+            // case BsonType.Symbol:
+            // case BsonType.JavaScriptWithScope:
+            // case BsonType.Timestamp:
+            // case BsonType.MinKey:
+            // case BsonType.MaxKey:
+            default:
+                throw CreateCannotDeserializeFromBsonTypeException(reader.GetCurrentBsonType());
         }
+    }
 
-        /// <inheritdoc/>
-        public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TSvo value)
+    /// <inheritdoc/>
+    public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TSvo value)
+    {
+        Guard.NotNull(context, nameof(context));
+
+        var writer = context.Writer;
+        var obj = ToJson(value);
+
+        if (obj is null)
         {
-            Guard.NotNull(context, nameof(context));
-
-            var writer = context.Writer;
-            var obj = ToJson(value);
-
-            if (obj is null)
+            writer.WriteNull();
+        }
+        else if (obj is string str)
+        {
+            writer.WriteString(str);
+        }
+        else if (obj is decimal dec)
+        {
+            writer.WriteDouble((double)dec);
+        }
+        else if (obj is double dbl)
+        {
+            writer.WriteDouble(dbl);
+        }
+        else if (obj is long num)
+        {
+            if (num >= int.MinValue && num <= int.MaxValue)
             {
-                writer.WriteNull();
-            }
-            else if (obj is string str)
-            {
-                writer.WriteString(str);
-            }
-            else if (obj is decimal dec)
-            {
-                writer.WriteDouble((double)dec);
-            }
-            else if (obj is double dbl)
-            {
-                writer.WriteDouble(dbl);
-            }
-            else if (obj is long num)
-            {
-                if (num >= int.MinValue && num <= int.MaxValue)
-                {
-                    writer.WriteInt32((int)num);
-                }
-                else
-                {
-                    writer.WriteInt64(num);
-                }
-            }
-            else if (obj is int int_)
-            {
-                writer.WriteInt32(int_);
-            }
-            else if (obj is bool b)
-            {
-                writer.WriteBoolean(b);
-            }
-            else if (obj is DateTime dt)
-            {
-                writer.WriteDateTime(dt.Ticks);
-            }
-            else if (obj is IFormattable f)
-            {
-                writer.WriteString(f.ToString(null, CultureInfo.InvariantCulture));
+                writer.WriteInt32((int)num);
             }
             else
             {
-                writer.WriteString(obj.ToString());
+                writer.WriteInt64(num);
             }
+        }
+        else if (obj is int int_)
+        {
+            writer.WriteInt32(int_);
+        }
+        else if (obj is bool b)
+        {
+            writer.WriteBoolean(b);
+        }
+        else if (obj is DateTime dt)
+        {
+            writer.WriteDateTime(dt.Ticks);
+        }
+        else if (obj is IFormattable f)
+        {
+            writer.WriteString(f.ToString(null, CultureInfo.InvariantCulture));
+        }
+        else
+        {
+            writer.WriteString(obj.ToString());
         }
     }
 }

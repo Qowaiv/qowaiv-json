@@ -1,9 +1,8 @@
-﻿namespace Qowaiv.Json.UnitTests.Models
+﻿namespace Qowaiv.Json.UnitTests.Models;
+
+internal class DtoClass
 {
-    internal class DtoClass
-    {
-        public SvoWithFromJson Svo { get; set; }
-        public int Identifier { get; set; }
-        public string Message { get; set; }
-    }
+    public SvoWithFromJson Svo { get; set; }
+    public int Identifier { get; set; }
+    public string Message { get; set; }
 }
