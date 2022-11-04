@@ -1,3 +1,3 @@
 ﻿namespace Qowaiv.Json.UnitTests.Models;
 
-public sealed class ForGeneric : Identifiers.Int32IdBehavior { }
+public sealed class ForGeneric : Qowaiv.Identifiers.Int32IdBehavior { }

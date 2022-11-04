@@ -7,8 +7,12 @@
     <Version>4.2.0</Version>
     <PackageIcon>package-icon-bson.png</PackageIcon>
     <PackageReleaseNotes>
+v4.2.0
+- Registered SvoBehavior as Svo&lt;TSvoBehavior&gt;. #13
+- Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
+
 v4.1.0
-- Registered IIdentifierBehavior as Id&lt;TBehavior&gt; #7
+- Registered IIdentifierBehavior as Id&lt;TBehavior&gt;. #7
 
 v4.0.2
 - Only register exported.
