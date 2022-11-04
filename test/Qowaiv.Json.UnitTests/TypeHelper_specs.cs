@@ -14,7 +14,7 @@ public class Is_no_ID_Behavior
     public void Misses_interface() => TypeHelper.IdBehavior(typeof(object)).Should().BeNull();
 
     [Test]
-    public void No_empty_ctor() => TypeHelper.IdBehavior(typeof(BehaviorWithoutCtor)).Should().BeNull();
+    public void No_empty_ctor() => TypeHelper.IdBehavior(typeof(IdBehaviorWithoutCtor)).Should().BeNull();
 }
 
 public class Is_no_SVO_Behavior
@@ -31,7 +31,7 @@ public class Is_ID_Behavior
 {
     [Test]
     public void With_interface_and_ctor() 
-        => TypeHelper.IdBehavior(typeof(SomeBehavior)).Should().Be(typeof(Id<SomeBehavior>));
+        => TypeHelper.IdBehavior(typeof(SomeIdBehavior)).Should().Be(typeof(Id<SomeIdBehavior>));
 }
 
 public class Is_SVO_dBehavior
@@ -55,8 +55,10 @@ public class CandidateTypes
             typeof(object), 
             typeof(Uuid),
             typeof(EmailAddress),
-            typeof(SomeBehavior),
+            typeof(SomeIdBehavior),
             typeof(SomeSvoBehavior),
+            typeof(AbstractIdBehavior),
+            typeof(AbstractSvoBehavior),
             typeof(List<int>),
             typeof(List<>) 
         };
@@ -67,13 +69,13 @@ public class CandidateTypes
                 typeof(object),
                 typeof(Uuid),
                 typeof(EmailAddress),
-                typeof(Id<SomeBehavior>),
+                typeof(Id<SomeIdBehavior>),
                 typeof(Svo<SomeSvoBehavior>),
             });
     }
 }
 
-public sealed class SomeBehavior : UuidBehavior { }
+public sealed class SomeIdBehavior : UuidBehavior { }
 
 public class SomeSvoBehavior : SvoBehavior { }
 
@@ -82,12 +84,15 @@ public sealed class SomeInheritedSvoBehavior : SomeSvoBehavior { }
 #pragma warning disable S3453 // Classes should not have only "private" constructors
 // The behavior we want to test.
 
-public sealed class BehaviorWithoutCtor : UuidBehavior
+public sealed class IdBehaviorWithoutCtor : UuidBehavior
 {
-    private BehaviorWithoutCtor() { }
+    private IdBehaviorWithoutCtor() { }
 }
 
 public sealed class SvoBehaviorWithoutCtor : SvoBehavior
 {
     private SvoBehaviorWithoutCtor() { }
 }
+
+public abstract class AbstractIdBehavior : GuidBehavior { }
+public abstract class AbstractSvoBehavior : SvoBehavior { }
