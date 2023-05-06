@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Json.Newtonsoft;
 
 /// <summary>A JSON converter that converts Single Value Objects based on naming conventions.</summary>
+[Inheritable]
 public class QowaivJsonConverter : JsonConverter
 {
     /// <summary>Registers the Qowaiv JSON converter.</summary>

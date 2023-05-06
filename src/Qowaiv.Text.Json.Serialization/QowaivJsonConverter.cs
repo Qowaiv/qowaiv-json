@@ -1,6 +1,7 @@
 ﻿namespace Qowaiv.Text.Json.Serialization;
 
 /// <summary>A JSON converter that converts Single Value Objects based on naming conventions.</summary>
+[Inheritable]
 public class QowaivJsonConverter : JsonConverterFactory
 {
     /// <inheritdoc />
