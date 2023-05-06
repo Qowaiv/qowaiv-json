@@ -8,28 +8,28 @@ public class QowaivJsonConverter : JsonConverterFactory
     [Pure]
     public override bool CanConvert(Type typeToConvert)
         => typeToConvert is { }
-        && !TypeHelper.NotNullable(typeToConvert).IsPrimitive
+        && !TypeHelper.NotNullable(typeToConvert)!.IsPrimitive
         && CreateConverter(typeToConvert, null) is { };
 
     /// <inheritdoc />
     [Pure]
-    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+    public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions? options)
     {
-        var type = TypeHelper.NotNullable(typeToConvert);
+        var type = TypeHelper.NotNullable(typeToConvert)!;
 
         if (notSupported.Contains(type))
         {
             return null;
         }
 
-        if (!converters.TryGetValue(typeToConvert, out JsonConverter converter))
+        if (!converters.TryGetValue(typeToConvert, out var converter))
         {
             lock (locker)
             {
                 if (!converters.TryGetValue(typeToConvert, out converter))
                 {
                     var converterType = typeof(ConventionBasedSerializer<>).MakeGenericType(typeToConvert);
-                    converter = (JsonConverter)Activator.CreateInstance(converterType);
+                    converter = (JsonConverter)Activator.CreateInstance(converterType)!;
 
                     if (converter.CanConvert(typeToConvert))
                     {

@@ -23,11 +23,11 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
             {
                 // Empty value for null-ables.
                 JsonToken.Null /*....*/ => isNullable ? null : Activator.CreateInstance(objectType),
-                JsonToken.String /*..*/ => fromJsonString((string)reader.Value),
-                JsonToken.Float /*...*/ => fromJsonDouble((double)reader.Value),
-                JsonToken.Integer /*.*/ => fromJsonLong((long)reader.Value),
+                JsonToken.String /*..*/ => fromJsonString(reader.Value as string),
+                JsonToken.Float /*...*/ => fromJsonDouble((double)reader.Value!),
+                JsonToken.Integer /*.*/ => fromJsonLong((long)reader.Value!),
                 JsonToken.Boolean /*.*/ => fromJsonBool(true.Equals(reader.Value)),
-                JsonToken.Date /*....*/ => fromJsonString(((DateTime)reader.Value).ToString(CultureInfo.InvariantCulture)),
+                JsonToken.Date /*....*/ => fromJsonString(((DateTime)reader.Value!).ToString(CultureInfo.InvariantCulture)),
 
                 // Other scenario's are not supported.
                 _ => throw new JsonSerializationException($"Unexpected token parsing {objectType.FullName}. {reader.TokenType} is not supported."),
@@ -47,20 +47,17 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
     }
 
     /// <inheritdoc />
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         Guard.NotNull(writer, nameof(writer));
 
-        var json = (TSvo)value;
-        var node = ToJson(json);
-
-        if (node is null)
+        if (value is TSvo json && ToJson(json) is { } node)
         {
-            writer.WriteNull();
+            writer.WriteValue(node);
         }
         else
         {
-            writer.WriteValue(node);
+            writer.WriteNull();
         }
     }
 }

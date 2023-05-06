@@ -23,7 +23,7 @@ internal sealed partial class ConventionBasedSerializer<TSvo>
 
             if (parameterType == typeof(string))
             {
-                fromJsonString = CompileDeserialize<string>(factory);
+                fromJsonString = CompileDeserialize<string?>(factory);
             }
             else if (parameterType == typeof(double))
             {
@@ -67,9 +67,9 @@ internal sealed partial class ConventionBasedSerializer<TSvo>
         && method.ReturnType != null;
 
     [Pure]
-    private Func<TSvo, object> CompileSerialize(MethodInfo method)
+    private Func<TSvo, object> CompileSerialize(MethodInfo? method)
     {
-        var toJson = method ?? typeof(object).GetMethod(nameof(ToString));
+        var toJson = method ?? typeof(object).GetMethod(nameof(ToString))!;
         var svo = Expression.Parameter(typeof(TSvo), "svo");
         var par = SvoType == typeof(TSvo)
             ? (Expression)svo
