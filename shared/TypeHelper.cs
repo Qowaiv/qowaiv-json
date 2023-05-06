@@ -69,10 +69,10 @@ internal static class TypeHelper
     }
 
     [Pure]
-    static IEnumerable<Type> BaseTypes(this Type type)
+    private static IEnumerable<Type> BaseTypes(this Type type)
     {
         var current = type.BaseType;
-        while(current is { })
+        while (current is { })
         {
             yield return current;
             current = current.BaseType;

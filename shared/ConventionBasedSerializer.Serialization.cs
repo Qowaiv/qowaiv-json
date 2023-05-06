@@ -2,7 +2,7 @@
 
 internal partial class ConventionBasedSerializer<TSvo>
 {
-    /// <summary>Creates a new instance of a <see cref="ConventionBasedSerializer{TSvo}"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConventionBasedSerializer{TSvo}"/> class.</summary>
     public ConventionBasedSerializer() => Initialize();
 
     /// <summary>Returns true if <typeparamref name="TSvo"/> is supported.</summary>

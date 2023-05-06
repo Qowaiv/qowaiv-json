@@ -5,13 +5,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
 
 namespace Qowaiv;
 
@@ -140,7 +135,6 @@ internal static partial class Guard
         => NotNull(parameter, paramName) is T instance
         ? instance
         : throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Messages.ArgumentException_NotAnInstanceOf, typeof(T)), paramName);
-
 
     /// <summary>Guards that the parameter is not null or an empty collection, otherwise throws an argument (null) exception.</summary>
     /// <typeparam name="T">The type to guard; must be an <see cref="ICollection" />.</typeparam>

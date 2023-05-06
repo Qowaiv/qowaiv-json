@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Qowaiv.Diagnostics.Contracts;
+using System.Reflection;
 
 namespace Qowaiv.Bson.MongoDB;
 
@@ -55,7 +56,7 @@ public static class QowaivBsonConverter
     }
 
     /// <summary>Guard that the converter actually supports conversion based on conventions.</summary>
-    [Pure]
+    [Impure]
     private static IBsonSerializer GuardType(IBsonSerializer converter)
         => TypeIsSupported(converter) ? converter : throw new NotSupportedException();
 

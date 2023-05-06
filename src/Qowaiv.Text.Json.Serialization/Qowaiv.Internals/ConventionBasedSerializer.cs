@@ -4,7 +4,7 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter<TSvo>
 {
     /// <inheritdoc />
     [Pure]
-    public override bool CanConvert(Type typeToConvert) 
+    public override bool CanConvert(Type typeToConvert)
         => typeToConvert == typeof(TSvo) && TypeIsSupported;
 
     /// <inheritdoc />
