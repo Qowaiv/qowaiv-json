@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
-using Qowaiv.Internals;
+﻿using Qowaiv.Diagnostics.Contracts;
 
 namespace Qowaiv.Bson.MongoDB;
 
@@ -8,11 +6,13 @@ namespace Qowaiv.Bson.MongoDB;
 /// <typeparam name="TSvo">
 /// The specific type of the Single Value object to convert.
 /// </typeparam>
+[Inheritable]
 public class QowaivBsonConverter<TSvo> : SerializerBase<TSvo>
 {
     private readonly ConventionBasedSerializer<TSvo> serializer = new();
 
     /// <inheritdoc/>
+    [Pure]
     public override TSvo Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         => serializer.Deserialize(context, args);
 

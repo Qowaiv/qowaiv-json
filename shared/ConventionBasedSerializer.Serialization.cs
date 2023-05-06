@@ -1,11 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace Qowaiv.Internals;
+﻿namespace Qowaiv.Internals;
 
 internal partial class ConventionBasedSerializer<TSvo>
 {
-    /// <summary>Creates a new instance of a <see cref="ConventionBasedSerializer{TSvo}"/>.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ConventionBasedSerializer{TSvo}"/> class.</summary>
     public ConventionBasedSerializer() => Initialize();
 
     /// <summary>Returns true if <typeparamref name="TSvo"/> is supported.</summary>
@@ -18,6 +15,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     /// <returns>
     /// The serialized JSON node.
     /// </returns>
+    [Pure]
     public object ToJson(TSvo svo) => toJsonObject(svo);
 
     /// <summary>Deserializes the JSON string.</summary>
@@ -27,6 +25,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     /// <returns>
     /// The actual instance of <typeparamref name="TSvo"/>.
     /// </returns>
+    [Pure]
     public TSvo FromJson(string json) => fromJsonString(json);
 
     /// <summary>Deserializes the JSON number.</summary>
@@ -36,6 +35,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     /// <returns>
     /// The actual instance of <typeparamref name="TSvo"/>.
     /// </returns>
+    [Pure]
     public TSvo FromJson(double json) => fromJsonDouble(json);
 
     /// <summary>Deserializes the JSON number.</summary>
@@ -45,6 +45,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     /// <returns>
     /// The actual instance of <typeparamref name="TSvo"/>.
     /// </returns>
+    [Pure]
     public TSvo FromJson(long json) => fromJsonLong(json);
 
     /// <summary>Deserializes the JSON boolean.</summary>
@@ -54,6 +55,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     /// <returns>
     /// The actual instance of <typeparamref name="TSvo"/>.
     /// </returns>
+    [Pure]
     public TSvo FromJson(bool json) => fromJsonBool(json);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]

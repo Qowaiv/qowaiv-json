@@ -1,12 +1,7 @@
-﻿using Newtonsoft.Json;
-using Qowaiv.Internals;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Qowaiv.Json.Newtonsoft;
+﻿namespace Qowaiv.Json.Newtonsoft;
 
 /// <summary>A JSON converter that converts Single Value Objects based on naming conventions.</summary>
+[Inheritable]
 public class QowaivJsonConverter : JsonConverter
 {
     /// <summary>Registers the Qowaiv JSON converter.</summary>
@@ -27,6 +22,7 @@ public class QowaivJsonConverter : JsonConverter
     }
 
     /// <inheritdoc />
+    [Pure]
     public override bool CanConvert(Type objectType)
     {
         var type = TypeHelper.NotNullable(objectType);
@@ -36,6 +32,7 @@ public class QowaivJsonConverter : JsonConverter
     }
 
     /// <inheritdoc />
+    [Impure]
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
         Guard.NotNull(objectType, nameof(objectType));
@@ -51,6 +48,7 @@ public class QowaivJsonConverter : JsonConverter
         converter.WriteJson(writer, value, serializer);
     }
 
+    [Pure]
     private JsonConverter CreateConverter(Type objectType)
     {
         var type = TypeHelper.NotNullable(objectType);

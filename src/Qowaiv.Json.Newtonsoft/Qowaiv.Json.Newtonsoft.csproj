@@ -3,7 +3,7 @@
   <Import Project="..\..\props\package.props" />
   
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
     <Version>4.2.0</Version>
     <PackageReleaseNotes>
 v4.2.0
@@ -20,6 +20,8 @@ v4.2.0
     <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Serialization.cs" />
     <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+    <Compile Include="..\..\shared\ImpureAttribute.cs" Link="Qowaiv.Diagnostics\Contracts\ImpureAttribute.cs" />
+    <Compile Include="..\..\shared\InheritableAttribute.cs" Link="Qowaiv.Diagnostics\Contracts\InheritableAttribute.cs" />
   </ItemGroup>
 
 </Project>

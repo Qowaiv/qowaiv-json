@@ -10,6 +10,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Qowaiv/qowaiv-json</RepositoryUrl>
 
+    <DefineConstants>CONTRACTS_FULL</DefineConstants>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>

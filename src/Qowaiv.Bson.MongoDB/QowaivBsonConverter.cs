@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization;
-using Qowaiv.Internals;
-using System;
+﻿using Qowaiv.Diagnostics.Contracts;
 using System.Reflection;
 
 namespace Qowaiv.Bson.MongoDB;
@@ -58,10 +56,12 @@ public static class QowaivBsonConverter
     }
 
     /// <summary>Guard that the converter actually supports conversion based on conventions.</summary>
+    [Impure]
     private static IBsonSerializer GuardType(IBsonSerializer converter)
         => TypeIsSupported(converter) ? converter : throw new NotSupportedException();
 
     /// <summary>Returns true if a name based convention is supported.</summary>
+    [Pure]
     private static bool TypeIsSupported(IBsonSerializer converter)
         => (bool)converter
         .GetType()
@@ -69,6 +69,7 @@ public static class QowaivBsonConverter
         .GetValue(converter, Array.Empty<object>());
 
     /// <summary>Creates an instance of <see cref="QowaivBsonConverter{TSvo}"/> based on the specified type.</summary>
+    [Pure]
     private static IBsonSerializer CreateConverter(Type type)
     {
         var converterType = typeof(QowaivBsonConverter<>).MakeGenericType(type);
