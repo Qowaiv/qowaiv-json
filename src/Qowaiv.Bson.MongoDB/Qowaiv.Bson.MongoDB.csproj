@@ -27,6 +27,7 @@ v4.0.1
     <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Serialization.cs" />
     <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
+    <Compile Include="..\..\shared\ImpureAttribute.cs" Link="Qowaiv.Diagnostics\Contracts\ImpureAttribute.cs" />
     <None Include="package-icon-bson.png" Pack="true" PackagePath="" />
     <None Remove="..\..\design\package-icon.png" />
   </ItemGroup>

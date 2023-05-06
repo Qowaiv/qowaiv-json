@@ -1,6 +1,5 @@
-﻿global using MongoDB.Bson;
-global using MongoDB.Bson.Serialization;
-global using MongoDB.Bson.Serialization.Serializers;
+﻿global using Newtonsoft.Json;
+global using Qowaiv.Diagnostics.Contracts;
 global using Qowaiv.Internals;
 global using System;
 global using System.Collections.Generic;

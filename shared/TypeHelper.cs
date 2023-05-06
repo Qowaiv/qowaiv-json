@@ -1,9 +1,5 @@
 #nullable enable
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Qowaiv.Internals;
 
 /// <summary>Internal helper class for analyzing <see cref="Type"/>s.</summary>
@@ -13,6 +9,7 @@ internal static class TypeHelper
     /// <param name="objectType">
     /// The type to test for.
     /// </param>
+    [Pure]
     public static Type? NotNullable(Type? objectType)
         => objectType is { } ? Nullable.GetUnderlyingType(objectType) ?? objectType : null;
 
@@ -20,6 +17,7 @@ internal static class TypeHelper
     /// <param name="types">
     /// The types to select from.
     /// </param>
+    [Pure]
     public static IEnumerable<Type> GetCandidateTypes(IEnumerable<Type> types)
     {
         return types.Where(IsSupported).Select(Transform);
@@ -36,11 +34,13 @@ internal static class TypeHelper
             ?? type;
     }
 
+    [Pure]
     public static Type? IdBehavior(Type type)
         => Id.Is(type)
         ? Type.GetType(Id.Generic)?.MakeGenericType(type)
         : null;
 
+    [Pure]
     public static Type? SvoBehavior(Type type)
         => Svo.Is(type)
         ? Type.GetType(Svo.Generic)?.MakeGenericType(type)
@@ -48,6 +48,7 @@ internal static class TypeHelper
 
     private static class Id
     {
+        [Pure]
         public static bool Is(Type type)
             => type.GetInterfaces().Any(i => i.FullName == Behavior)
             && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
@@ -58,6 +59,7 @@ internal static class TypeHelper
 
     private static class Svo
     {
+        [Pure]
         public static bool Is(Type type)
            => type.BaseTypes().Any(i => i.FullName == Behavior)
            && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
@@ -66,6 +68,7 @@ internal static class TypeHelper
         public const string Behavior = "Qowaiv.Customization.SvoBehavior";
     }
 
+    [Pure]
     static IEnumerable<Type> BaseTypes(this Type type)
     {
         var current = type.BaseType;

@@ -1,18 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Globalization;
-
-namespace Qowaiv.Internals;
+﻿namespace Qowaiv.Internals;
 
 internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
 {
     /// <inheritdoc />
-    public override bool CanConvert(Type objectType)
-    {
-        return objectType == typeof(TSvo) && TypeIsSupported;
-    }
+    [Pure]
+    public override bool CanConvert(Type objectType) 
+        => objectType == typeof(TSvo) && TypeIsSupported;
 
     /// <inheritdoc />
+    [Impure]
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
         Guard.NotNull(reader, nameof(reader));

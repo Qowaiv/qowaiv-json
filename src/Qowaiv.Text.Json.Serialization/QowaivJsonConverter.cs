@@ -1,21 +1,17 @@
-﻿using Qowaiv.Internals;
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
-namespace Qowaiv.Text.Json.Serialization;
+﻿namespace Qowaiv.Text.Json.Serialization;
 
 /// <summary>A JSON converter that converts Single Value Objects based on naming conventions.</summary>
 public class QowaivJsonConverter : JsonConverterFactory
 {
     /// <inheritdoc />
+    [Pure]
     public override bool CanConvert(Type typeToConvert)
         => typeToConvert is { }
         && !TypeHelper.NotNullable(typeToConvert).IsPrimitive
         && CreateConverter(typeToConvert, null) is { };
 
     /// <inheritdoc />
+    [Pure]
     public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var type = TypeHelper.NotNullable(typeToConvert);

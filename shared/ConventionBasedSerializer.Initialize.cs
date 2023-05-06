@@ -1,12 +1,9 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Qowaiv.Internals;
 
-internal partial class ConventionBasedSerializer<TSvo>
+internal sealed partial class ConventionBasedSerializer<TSvo>
 {
 #pragma warning disable S2743 // Static fields should not be used in generic types
     private static readonly Type[] NodeTypes = new[] { typeof(string), typeof(double), typeof(long), typeof(bool) };
@@ -56,17 +53,20 @@ internal partial class ConventionBasedSerializer<TSvo>
         }
     }
 
+    [Pure]
     private bool IsFactory(MethodInfo method)
         => method.ReturnType == SvoType
         && method.Name == nameof(ConventionBasedSerializer<object>.FromJson)
         && method.GetParameters().Length == 1
         && NodeTypes.Contains(method.GetParameters()[0].ParameterType);
 
+    [Pure]
     private static bool IsToJson(MethodInfo method)
         => method.Name == nameof(ConventionBasedSerializer<object>.ToJson)
         && method.GetParameters().Length == 0
         && method.ReturnType != null;
 
+    [Pure]
     private Func<TSvo, object> CompileSerialize(MethodInfo method)
     {
         var toJson = method ?? typeof(object).GetMethod(nameof(ToString));
@@ -87,7 +87,8 @@ internal partial class ConventionBasedSerializer<TSvo>
         return expression.Compile();
     }
 
-    private Func<TNode, TSvo> CompileDeserialize<TNode>(MethodInfo method)
+    [Pure]
+    private static Func<TNode, TSvo> CompileDeserialize<TNode>(MethodInfo method)
     {
         var node = Expression.Parameter(typeof(TNode), "node");
         Expression body = Expression.Call(method, node);

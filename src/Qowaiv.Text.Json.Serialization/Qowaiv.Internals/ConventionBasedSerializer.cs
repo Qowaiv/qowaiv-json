@@ -1,19 +1,14 @@
-﻿using System;
-using System.Globalization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
-namespace Qowaiv.Internals;
+﻿namespace Qowaiv.Internals;
 
 internal partial class ConventionBasedSerializer<TSvo> : JsonConverter<TSvo>
 {
     /// <inheritdoc />
-    public override bool CanConvert(Type typeToConvert)
-    {
-        return typeToConvert == typeof(TSvo) && TypeIsSupported;
-    }
+    [Pure]
+    public override bool CanConvert(Type typeToConvert) 
+        => typeToConvert == typeof(TSvo) && TypeIsSupported;
 
     /// <inheritdoc />
+    [Impure]
     public override TSvo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         try
