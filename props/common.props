@@ -7,12 +7,17 @@
     <Owners>Qowaiv community</Owners>
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
-    <Copyright>Copyright © Qowaiv community 2019</Copyright>
+    <Copyright>Copyright © Qowaiv community 2019-current</Copyright>
     <LangVersion>latest</LangVersion>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.*">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="*-*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
