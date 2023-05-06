@@ -9,7 +9,7 @@ internal partial class ConventionBasedSerializer<TSvo> : JsonConverter
 
     /// <inheritdoc />
     [Impure]
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
         Guard.NotNull(reader, nameof(reader));
         Guard.NotNull(objectType, nameof(objectType));
