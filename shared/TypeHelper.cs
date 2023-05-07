@@ -17,8 +17,14 @@ internal static class TypeHelper
     /// </param>
     [Pure]
     public static IEnumerable<Type> GetCandidateTypes(IEnumerable<Type> types)
+        => types.Select(GetCandidateType).OfType<Type>();
+
+    [Pure]
+    public static Type? GetCandidateType(Type type)
     {
-        return types.Where(IsSupported).Select(Transform);
+        return IsSupported(type)
+            ? Transform(type)
+            : null;
 
         static bool IsSupported(Type type)
             => !type.IsAbstract
