@@ -7,6 +7,7 @@ namespace Qowaiv.Bson.MongoDB;
 /// The specific type of the Single Value object to convert.
 /// </typeparam>
 [Inheritable]
+[Obsolete("Use QowaivBsonSerializer instead.")]
 public class QowaivBsonConverter<TSvo> : SerializerBase<TSvo>
 {
     private readonly ConventionBasedSerializer<TSvo> serializer = new();

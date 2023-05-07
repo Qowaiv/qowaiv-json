@@ -1,9 +1,9 @@
-﻿using Qowaiv.Diagnostics.Contracts;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Qowaiv.Bson.MongoDB;
 
 /// <summary>Static helper class to register <see cref="QowaivBsonConverter{TSvo}"/> for specific types.</summary>
+[Obsolete("Use QowaivBsonSerializers instead.")]
 public static class QowaivBsonConverter
 {
     /// <summary>Registers all supported types of the assembly.</summary>
