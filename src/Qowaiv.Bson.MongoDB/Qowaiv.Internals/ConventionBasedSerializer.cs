@@ -16,7 +16,7 @@ internal partial class ConventionBasedSerializer<TSvo> : SerializerBase<TSvo>
             case BsonType.Null:
                 // consume and ignore.
                 reader.SkipValue();
-                return default;
+                return default!;
 
             case BsonType.DateTime:
             case BsonType.String:

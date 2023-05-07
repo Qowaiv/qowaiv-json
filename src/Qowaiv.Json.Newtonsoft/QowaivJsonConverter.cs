@@ -33,39 +33,39 @@ public class QowaivJsonConverter : JsonConverter
 
     /// <inheritdoc />
     [Impure]
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
         Guard.NotNull(objectType, nameof(objectType));
-        var converter = CreateConverter(objectType);
+        var converter = CreateConverter(objectType) ?? throw new NotSupportedException($"Type '{objectType}' is not supported.");
         return converter.ReadJson(reader, objectType, existingValue, serializer);
     }
 
     /// <inheritdoc />
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         var objectType = Guard.NotNull(value, nameof(value)).GetType();
-        var converter = CreateConverter(objectType);
+        var converter = CreateConverter(objectType) ?? throw new NotSupportedException($"Type '{objectType}' is not supported.");
         converter.WriteJson(writer, value, serializer);
     }
 
     [Pure]
-    private JsonConverter CreateConverter(Type objectType)
+    private JsonConverter? CreateConverter(Type objectType)
     {
-        var type = TypeHelper.NotNullable(objectType);
+        var type = TypeHelper.NotNullable(objectType)!;
 
         if (notSupported.Contains(type))
         {
             return null;
         }
 
-        if (!converters.TryGetValue(type, out JsonConverter converter))
+        if (!converters.TryGetValue(type, out var converter))
         {
             lock (locker)
             {
                 if (!converters.TryGetValue(type, out converter))
                 {
                     var converterType = typeof(ConventionBasedSerializer<>).MakeGenericType(type);
-                    converter = (JsonConverter)Activator.CreateInstance(converterType);
+                    converter = (JsonConverter)Activator.CreateInstance(converterType)!;
 
                     if (converter.CanConvert(type))
                     {
@@ -79,7 +79,6 @@ public class QowaivJsonConverter : JsonConverter
                 }
             }
         }
-
         return converter;
     }
 

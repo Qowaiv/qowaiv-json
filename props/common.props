@@ -8,6 +8,10 @@
     <PackageTags>qowaiv domain model</PackageTags>
     <Company>Qowaiv community</Company>
     <Copyright>Copyright © Qowaiv community 2019-current</Copyright>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>

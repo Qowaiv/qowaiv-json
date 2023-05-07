@@ -1,5 +1,3 @@
-#nullable enable
-
 namespace Qowaiv.Internals;
 
 /// <summary>Internal helper class for analyzing <see cref="Type"/>s.</summary>

@@ -3,7 +3,9 @@
 internal partial class ConventionBasedSerializer<TSvo>
 {
     /// <summary>Initializes a new instance of the <see cref="ConventionBasedSerializer{TSvo}"/> class.</summary>
+#pragma warning disable CS8618 // Initialize does actually initialize all.
     public ConventionBasedSerializer() => Initialize();
+#pragma warning restore CS8618
 
     /// <summary>Returns true if <typeparamref name="TSvo"/> is supported.</summary>
     public bool TypeIsSupported => fromJsonString != null;
@@ -16,7 +18,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     /// The serialized JSON node.
     /// </returns>
     [Pure]
-    public object ToJson(TSvo svo) => toJsonObject(svo);
+    public object? ToJson(TSvo svo) => toJsonObject(svo);
 
     /// <summary>Deserializes the JSON string.</summary>
     /// <param name="json">
@@ -26,7 +28,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     /// The actual instance of <typeparamref name="TSvo"/>.
     /// </returns>
     [Pure]
-    public TSvo FromJson(string json) => fromJsonString(json);
+    public TSvo FromJson(string? json) => fromJsonString(json);
 
     /// <summary>Deserializes the JSON number.</summary>
     /// <param name="json">
@@ -59,7 +61,7 @@ internal partial class ConventionBasedSerializer<TSvo>
     public TSvo FromJson(bool json) => fromJsonBool(json);
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private Func<string, TSvo> fromJsonString;
+    private Func<string?, TSvo> fromJsonString;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private Func<double, TSvo> fromJsonDouble;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -67,5 +69,5 @@ internal partial class ConventionBasedSerializer<TSvo>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private Func<bool, TSvo> fromJsonBool;
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private Func<TSvo, object> toJsonObject;
+    private Func<TSvo, object?> toJsonObject;
 }
