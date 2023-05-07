@@ -22,6 +22,7 @@ internal static class TypeHelper
     [Pure]
     public static Type? GetCandidateType(Type type)
     {
+        type = NotNullable(type)!;
         return IsSupported(type)
             ? Transform(type)
             : null;

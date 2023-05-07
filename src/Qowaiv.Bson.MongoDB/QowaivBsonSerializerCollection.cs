@@ -3,6 +3,8 @@
 namespace Qowaiv.Bson.MongoDB;
 
 /// <summary>Contains a collection of <see cref="QowaivBsonSerializer{TSvo}"/>s.</summary>
+[DebuggerTypeProxy(typeof(Diagnostics.CollectionDebugView))]
+[DebuggerDisplay("Count = {Count}")]
 public sealed class QowaivBsonSerializerCollection : IReadOnlyCollection<IBsonSerializer>
 {
     private readonly Dictionary<Type, IBsonSerializer> Serializers = new();
@@ -55,7 +57,7 @@ public sealed class QowaivBsonSerializerCollection : IReadOnlyCollection<IBsonSe
     public void Add(Assembly assembly, bool exportableTypesOnly)
     {
         Guard.NotNull(assembly, nameof(assembly));
-        AddRange(exportableTypesOnly 
+        AddRange(exportableTypesOnly
             ? assembly.GetExportedTypes()
             : assembly.GetTypes());
     }
@@ -76,7 +78,7 @@ public sealed class QowaivBsonSerializerCollection : IReadOnlyCollection<IBsonSe
 
     /// <summary>Returns true if the collection contains a serializer for the specified type.</summary>
     [Pure]
-    public bool Contains(Type type) 
+    public bool Contains(Type type)
         => Serializers.ContainsKey(Guard.NotNull(type, nameof(type)));
 
     /// <summary>Removes the serializer for the specific type from the collection.</summary>
@@ -110,6 +112,7 @@ public sealed class QowaivBsonSerializerCollection : IReadOnlyCollection<IBsonSe
 
     /// <inheritdoc />
     [Pure]
+    [ExcludeFromCodeCoverage]
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>Returns true if a name based convention is supported.</summary>

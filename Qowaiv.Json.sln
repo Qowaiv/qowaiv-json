@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Json.Newtonsoft", "src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj", "{A67B3069-E128-42E2-B7B7-869BDB0BBEDF}"
 EndProject
@@ -52,6 +52,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Bson.MongoDB", "src\Qowaiv.Bson.MongoDB\Qowaiv.Bson.MongoDB.csproj", "{33601DB6-1C23-4359-B228-480446C952CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{E5A1D121-54A6-446D-8869-D3238E94A1F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qowaiv.Json.Specs", "specs\Qowaiv.Json.Specs\Qowaiv.Json.Specs.csproj", "{1A7235DE-F8CC-405B-86EA-784E1C515C86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,10 @@ Global
 		{33601DB6-1C23-4359-B228-480446C952CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33601DB6-1C23-4359-B228-480446C952CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33601DB6-1C23-4359-B228-480446C952CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A7235DE-F8CC-405B-86EA-784E1C515C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A7235DE-F8CC-405B-86EA-784E1C515C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A7235DE-F8CC-405B-86EA-784E1C515C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A7235DE-F8CC-405B-86EA-784E1C515C86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +89,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F8326749-3AAB-4722-BA2C-C9A4724AE946} = {5FDFA4BE-73B6-4F14-BF57-416EDC2166F8}
 		{540CD5DC-2B21-4235-8327-B91B07C908A9} = {6A3758C1-976E-4AAD-851D-86BF6C1E2715}
+		{1A7235DE-F8CC-405B-86EA-784E1C515C86} = {E5A1D121-54A6-446D-8869-D3238E94A1F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC82C879-2EFD-4D73-8705-860A9311FAC8}

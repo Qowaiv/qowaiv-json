@@ -7,6 +7,9 @@
     <Version>4.2.0</Version>
     <PackageIcon>package-icon-bson.png</PackageIcon>
     <PackageReleaseNotes>
+v4.3.0
+
+- Support .NET 7.0. #16
 v4.2.0
 - Registered SvoBehavior as Svo&lt;TSvoBehavior&gt;. #13
 - Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
@@ -35,6 +38,10 @@ v4.0.1
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.13.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
