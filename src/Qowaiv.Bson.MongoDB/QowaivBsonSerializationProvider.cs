@@ -29,6 +29,10 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
             {
                 Serializers[tp] = serializer;
             }
+            else
+            {
+                NotSupported.Add(tp);
+            }
             return serializer;
         }
     }
