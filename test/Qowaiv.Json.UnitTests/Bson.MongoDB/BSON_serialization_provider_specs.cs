@@ -4,7 +4,7 @@ using Qowaiv.Identifiers;
 using Qowaiv.Json.UnitTests.Models;
 using Specs.Models;
 
-namespace BSON.MongoDB.BSON_serialization_provider_sepcs;
+namespace BSON.MongoDB.BSON_serialization_provider_specs;
 
 public class Gets_serializer
 {
