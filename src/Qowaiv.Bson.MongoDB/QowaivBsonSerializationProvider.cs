@@ -56,5 +56,8 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
         .GetProperty(nameof(QowaivBsonSerializer<object>.TypeIsSupported), NonPublicInstance)!
         .GetValue(converter, Array.Empty<object>())!;
 
-    private const BindingFlags NonPublicInstance = (BindingFlags)36;
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
+    // We do not want to publicly expose this, but are certain it will always exist.
+    private const BindingFlags NonPublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
 }
