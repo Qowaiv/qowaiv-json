@@ -69,6 +69,7 @@ class Caches_for_performance_reasons
             .Should().BeSameAs(serializer);
     }
 
+    /// <remarks>This not fully proves that the cache has been hit.</remarks>
     [Test]
     public void unsupported_types()
     {
