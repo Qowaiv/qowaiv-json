@@ -1,10 +1,8 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using Qowaiv;
+﻿using Qowaiv;
 using Qowaiv.Customization;
 using Qowaiv.Identifiers;
 using Qowaiv.Internals;
-using System.Collections.Generic;
+using Specs.Models;
 
 namespace TypeHelper_specs;
 
@@ -25,7 +23,6 @@ public class Is_no_SVO_Behavior
     [Test]
     public void No_empty_ctor() => TypeHelper.SvoBehavior(typeof(SvoBehaviorWithoutCtor)).Should().BeNull();
 }
-
 
 public class Is_ID_Behavior
 {
@@ -71,28 +68,7 @@ public class CandidateTypes
                 typeof(EmailAddress),
                 typeof(Id<SomeIdBehavior>),
                 typeof(Svo<SomeSvoBehavior>),
+                typeof(List<int>),
             });
     }
 }
-
-public sealed class SomeIdBehavior : UuidBehavior { }
-
-public class SomeSvoBehavior : SvoBehavior { }
-
-public sealed class SomeInheritedSvoBehavior : SomeSvoBehavior { }
-
-#pragma warning disable S3453 // Classes should not have only "private" constructors
-// The behavior we want to test.
-
-public sealed class IdBehaviorWithoutCtor : UuidBehavior
-{
-    private IdBehaviorWithoutCtor() { }
-}
-
-public sealed class SvoBehaviorWithoutCtor : SvoBehavior
-{
-    private SvoBehaviorWithoutCtor() { }
-}
-
-public abstract class AbstractIdBehavior : GuidBehavior { }
-public abstract class AbstractSvoBehavior : SvoBehavior { }

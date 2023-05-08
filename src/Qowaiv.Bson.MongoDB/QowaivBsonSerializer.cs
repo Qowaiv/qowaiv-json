@@ -5,8 +5,7 @@
 /// The specific type of the Single Value object to convert.
 /// </typeparam>
 [Inheritable]
-[Obsolete("Use QowaivBsonSerializer instead.")]
-public class QowaivBsonConverter<TSvo> : SerializerBase<TSvo>
+public class QowaivBsonSerializer<TSvo> : SerializerBase<TSvo>
 {
     private readonly ConventionBasedSerializer<TSvo> serializer = new();
 
@@ -18,6 +17,10 @@ public class QowaivBsonConverter<TSvo> : SerializerBase<TSvo>
     /// <inheritdoc/>
     public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, TSvo value)
         => serializer.Serialize(context, args, value);
+
+    /// <inheritdoc />
+    [Pure]
+    public override string ToString() => $"{GetType().Namespace}.{nameof(QowaivBsonSerializer<TSvo>)}<{typeof(TSvo)}>";
 
     /// <summary>Returns true if <typeparamref name="TSvo"/> is supported.</summary>
     internal bool TypeIsSupported => serializer.TypeIsSupported;
