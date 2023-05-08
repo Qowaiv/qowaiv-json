@@ -52,8 +52,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Bson.MongoDB", "src\Qowaiv.Bson.MongoDB\Qowaiv.Bson.MongoDB.csproj", "{33601DB6-1C23-4359-B228-480446C952CB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{E5A1D121-54A6-446D-8869-D3238E94A1F4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
