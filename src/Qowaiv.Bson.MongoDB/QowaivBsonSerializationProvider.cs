@@ -16,7 +16,7 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
     {
         IBsonSerializer? serializer = null;
 
-        if (TypeHelper.GetCandidateType(type) is not { } tp
+        if (GetCandidateType(type) is not { } tp
             || NotSupported.Contains(tp)
             || Serializers.TryGetValue(tp, out serializer))
         {
@@ -55,6 +55,20 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
         .GetType()
         .GetProperty(nameof(QowaivBsonSerializer<object>.TypeIsSupported), NonPublicInstance)!
         .GetValue(converter, Array.Empty<object>())!;
+
+    [Pure]
+    private static Type? GetCandidateType(Type? type)
+    {
+        return TypeHelper.NotNullable(type) is { } tp && IsSupported(tp)
+            ? tp
+            : null;
+
+        static bool IsSupported(Type type)
+            => !type.IsAbstract
+            && !type.IsGenericTypeDefinition
+            && !type.ContainsGenericParameters
+            && !type.IsGenericTypeDefinition;
+    }
 
 #pragma warning disable S3011
 

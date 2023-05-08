@@ -21,7 +21,7 @@ public class Gets_serializer
         .Should().BeOfType<QowaivBsonSerializer<SvoWithFromJsonStringOnly>>();
 
     [Test]
-    public void FromJson_string_only_SVO_class()
+    public void FromJson_SVO_class()
         => provider.GetSerializer(typeof(SvoWithFromJsonClass))
         .Should().BeOfType<QowaivBsonSerializer<SvoWithFromJsonClass>>();
 
@@ -30,20 +30,9 @@ public class Gets_serializer
         => provider.GetSerializer(typeof(Id<SomeIdBehavior>))
         .Should().BeOfType<QowaivBsonSerializer<Id<SomeIdBehavior>>>();
 
-
-    [Test]
-    public void Qowaiv_ID_via_behavior()
-        => provider.GetSerializer(typeof(SomeIdBehavior))
-        .Should().BeOfType<QowaivBsonSerializer<Id<SomeIdBehavior>>>();
-
     [Test]
     public void Qowaiv_generic_SVO()
         => provider.GetSerializer(typeof(Svo<SomeSvoBehavior>))
-        .Should().BeOfType<QowaivBsonSerializer<Svo<SomeSvoBehavior>>>();
-
-    [Test]
-    public void Qowaiv_generic_SVO_via_behavior()
-        => provider.GetSerializer(typeof(SomeSvoBehavior))
         .Should().BeOfType<QowaivBsonSerializer<Svo<SomeSvoBehavior>>>();
 }
 
@@ -68,7 +57,7 @@ public class Gets_null
         => provider.GetSerializer(typeof(DtoClass)).Should().BeNull();
 }
 
-class Cashes_for_performance_reasons
+class Caches_for_performance_reasons
 {
     [Test]
     public void serializers_already_requested()
