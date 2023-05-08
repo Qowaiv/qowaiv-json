@@ -20,16 +20,15 @@ internal static class TypeHelper
         => types.Select(GetCandidateType).OfType<Type>();
 
     [Pure]
-    public static Type? GetCandidateType(Type type)
+    public static Type? GetCandidateType(Type? type)
     {
-        type = NotNullable(type)!;
-        return IsSupported(type)
-            ? Transform(type)
+        return NotNullable(type) is { } tp && IsSupported(tp)
+            ? Transform(tp)
             : null;
 
         static bool IsSupported(Type type)
             => !type.IsAbstract
-            && !type.IsGenericType
+            && !type.IsGenericTypeDefinition
             && !type.ContainsGenericParameters
             && !type.IsGenericTypeDefinition;
 

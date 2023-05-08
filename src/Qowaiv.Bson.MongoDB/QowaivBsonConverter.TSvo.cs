@@ -1,6 +1,4 @@
-﻿using Qowaiv.Diagnostics.Contracts;
-
-namespace Qowaiv.Bson.MongoDB;
+﻿namespace Qowaiv.Bson.MongoDB;
 
 /// <summary>A BSON converter that converts Single Value Objects based on naming conventions.</summary>
 /// <typeparam name="TSvo">
