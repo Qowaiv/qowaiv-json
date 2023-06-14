@@ -14,17 +14,15 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
     [Pure]
     public IBsonSerializer? GetSerializer(Type? type)
     {
-        if (GetCandidateType(type) is { } tp)
-        {
-            var serializer = Serializers.TryGetValue(tp, out var existing)
-                ? existing
-                : CreateSerializer(tp);
+        if (GetCandidateType(type) is not { } tp) return null;
 
-            return serializer is { } && !tp.Equals(type)
-                ? AsNulllableSerializer(serializer)
-                : serializer;
-        }
-        else return null;
+        var serializer = Serializers.TryGetValue(tp, out var existing)
+            ? existing
+            : CreateSerializer(tp);
+
+        return serializer is { } && !tp.Equals(type)
+            ? AsNulllableSerializer(serializer)
+            : serializer;
     }
 
     /// <summary>Creates an instance of <see cref="QowaivBsonSerializer{TSvo}"/> based on the specified type.</summary>

@@ -9,7 +9,7 @@
     <PackageReleaseNotes>
 v4.3.1
 - QowaivBsonSerializationProvider support nullable value-types. #21
-- QowaivBsonSerializationProvider threat-safe. #20
+- QowaivBsonSerializationProvider thread-safe. #20
 v4.3.0
 - Introduction of QowaivBsonSerializationProvider. #18
 - Marked QowaivBsonConverter as obsolete. #18
