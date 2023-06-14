@@ -4,9 +4,12 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
-    <Version>4.3.0</Version>
+    <Version>4.3.1</Version>
     <PackageIcon>package-icon-bson.png</PackageIcon>
     <PackageReleaseNotes>
+v4.3.1
+- QowaivBsonSerializationProvider support nullable value-types. #21
+- QowaivBsonSerializationProvider threat-safe. #20
 v4.3.0
 - Introduction of QowaivBsonSerializationProvider. #18
 - Marked QowaivBsonConverter as obsolete. #18
