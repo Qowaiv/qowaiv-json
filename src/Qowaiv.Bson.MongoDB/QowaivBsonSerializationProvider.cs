@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace Qowaiv.Bson.MongoDB;
 
@@ -7,8 +8,7 @@ namespace Qowaiv.Bson.MongoDB;
 /// </summary>
 public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
 {
-    private readonly HashSet<Type> NotSupported = new();
-    private readonly Dictionary<Type, IBsonSerializer> Serializers = new();
+    private readonly ConcurrentDictionary<Type, IBsonSerializer?> Serializers = new();
 
     /// <inheritdoc />
     [Pure]
@@ -17,24 +17,14 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
         IBsonSerializer? serializer = null;
 
         if (GetCandidateType(type) is not { } tp
-            || NotSupported.Contains(tp)
             || Serializers.TryGetValue(tp, out serializer))
         {
             return serializer;
         }
-        else
-        {
-            serializer = CreateSerializer(tp);
-            if (serializer is { })
-            {
-                Serializers[tp] = serializer;
-            }
-            else
-            {
-                NotSupported.Add(tp);
-            }
-            return serializer;
-        }
+
+        serializer = CreateSerializer(tp);
+        Serializers[tp] = serializer;
+        return serializer;
     }
 
     /// <summary>Creates an instance of <see cref="QowaivBsonSerializer{TSvo}"/> based on the specified type.</summary>
