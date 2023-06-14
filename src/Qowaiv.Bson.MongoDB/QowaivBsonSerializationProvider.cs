@@ -14,28 +14,33 @@ public sealed class QowaivBsonSerializationProvider : IBsonSerializationProvider
     [Pure]
     public IBsonSerializer? GetSerializer(Type? type)
     {
-        IBsonSerializer? serializer = null;
+        if (GetCandidateType(type) is not { } tp) return null;
 
-        if (GetCandidateType(type) is not { } tp
-            || Serializers.TryGetValue(tp, out serializer))
-        {
-            return serializer;
-        }
+        var serializer = Serializers.TryGetValue(tp, out var existing)
+            ? existing
+            : CreateSerializer(tp);
 
-        serializer = CreateSerializer(tp);
-        Serializers[tp] = serializer;
-        return serializer;
+        return serializer is { } && !tp.Equals(type)
+            ? AsNulllableSerializer(serializer)
+            : serializer;
     }
 
     /// <summary>Creates an instance of <see cref="QowaivBsonSerializer{TSvo}"/> based on the specified type.</summary>
     [Pure]
-    private static IBsonSerializer? CreateSerializer(Type type)
+    private IBsonSerializer? CreateSerializer(Type type)
     {
         var converterType = typeof(QowaivBsonSerializer<>).MakeGenericType(type);
         var serializer = (IBsonSerializer)Activator.CreateInstance(converterType)!;
-        return IsSupported(serializer)
-            ? serializer
-            : null;
+        serializer = IsSupported(serializer) ? serializer : null;
+        Serializers[type] = serializer;
+        return serializer;
+    }
+
+    [Pure]
+    private static IBsonSerializer AsNulllableSerializer(IBsonSerializer serializer)
+    {
+        var nullable = typeof(NullableSerializer<>).MakeGenericType(serializer.ValueType);
+        return (IBsonSerializer)Activator.CreateInstance(nullable, serializer)!;
     }
 
     /// <summary>Returns true if a name based convention is supported.</summary>

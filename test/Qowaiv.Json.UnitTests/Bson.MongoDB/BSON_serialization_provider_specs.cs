@@ -1,4 +1,5 @@
-﻿using Qowaiv.Bson.MongoDB;
+﻿using MongoDB.Bson.Serialization.Serializers;
+using Qowaiv.Bson.MongoDB;
 using Qowaiv.Customization;
 using Qowaiv.Identifiers;
 using Qowaiv.Json.UnitTests.Models;
@@ -18,7 +19,7 @@ public class Gets_serializer
     [Test]
     public void nullable_FromJson_string_only_SVO()
         => provider.GetSerializer(typeof(SvoWithFromJsonStringOnly?))
-        .Should().BeOfType<QowaivBsonSerializer<SvoWithFromJsonStringOnly>>();
+        .Should().BeOfType<NullableSerializer<SvoWithFromJsonStringOnly>>();
 
     [Test]
     public void FromJson_SVO_class()
