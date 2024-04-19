@@ -18,7 +18,7 @@
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>4.2.0</PackageValidationBaselineVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)..\shared\ProductInfo.cs" Link="Properties\ProductInfo.cs" />
     <!-- Package icon. -->
     <None Include="$(MSBuildThisFileDirectory)..\design\package-icon.png" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup Label="Additional files">

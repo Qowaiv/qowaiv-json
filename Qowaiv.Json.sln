@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qowaiv.Text.Json.Serializat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{E7FEE4A6-9D3C-4738-A8B4-44A4640D9654}"
 	ProjectSection(SolutionItems) = preProject
+		shared\ArrayExtensions.cs = shared\ArrayExtensions.cs
 		shared\ConventionBasedSerializer.Initialize.cs = shared\ConventionBasedSerializer.Initialize.cs
 		shared\ConventionBasedSerializer.Serialization.cs = shared\ConventionBasedSerializer.Serialization.cs
 		shared\Guard.cs = shared\Guard.cs

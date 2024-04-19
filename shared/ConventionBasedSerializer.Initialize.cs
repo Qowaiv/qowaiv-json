@@ -47,7 +47,7 @@ internal sealed partial class ConventionBasedSerializer<TSvo>
 
             var toJson = SvoType
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .FirstOrDefault(IsToJson);
+                .Find(IsToJson);
 
             toJsonObject = CompileSerialize(toJson);
         }

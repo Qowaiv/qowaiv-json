@@ -18,6 +18,7 @@ v4.2.0
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\shared\ArrayExtensions.cs" Link="ArrayExtensions.cs" />
     <Compile Include="..\..\shared\ConventionBasedSerializer.Initialize.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Initialize.cs" />
     <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Serialization.cs" />
     <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />
