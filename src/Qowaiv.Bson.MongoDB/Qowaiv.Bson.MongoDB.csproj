@@ -41,7 +41,7 @@ v4.0.1
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Bson" Version="2.13.1" />
+    <PackageReference Include="MongoDB.Bson" Version="[2.13.1,)" />
   </ItemGroup>
 
   <ItemGroup>
