@@ -1,9 +1,7 @@
 ﻿using MongoDB.Bson.Serialization;
-using NUnit.Framework;
 using Qowaiv.Bson.MongoDB;
 using Qowaiv.Json.UnitTests.Models;
 using Qowaiv.Json.UnitTests.TestTools;
-using System;
 
 namespace Qowaiv.Json.UnitTests;
 
@@ -19,12 +17,10 @@ public class BsonMongoDBSerializeTest : JsonSerializeTestBase<FormatException>
 
     [Test]
     public void Serialize_LongBiggerThanIntMax_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson(123456789000));
-        Assert.AreEqual(@"NumberLong(""123456789000"")", json);
-    }
+        => Serialize(new SvoWithFromJson(123456789000)).Should().Be(@"NumberLong(""123456789000"")");
 
-    protected override T Deserialize<T>(string jsonString) => BsonSerializer.Deserialize<T>(jsonString);
+    protected override T Deserialize<T>(string? jsonString)
+        => BsonSerializer.Deserialize<T>(jsonString);
 
     protected override string Serialize(object obj) => TestSerializer.BsonSerialize(obj);
 }

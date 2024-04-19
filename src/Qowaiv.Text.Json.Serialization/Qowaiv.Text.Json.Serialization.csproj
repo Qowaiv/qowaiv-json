@@ -3,7 +3,9 @@
   <Import Project="..\..\props\package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <PackageId>Qowaiv.Text.Json.Serialization</PackageId>
     <Version>4.2.0</Version>
     <PackageReleaseNotes>
 v4.2.0
@@ -12,6 +14,7 @@ v4.2.0
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\shared\ArrayExtensions.cs" Link="ArrayExtensions.cs" />
     <Compile Include="..\..\shared\ConventionBasedSerializer.Initialize.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Initialize.cs" />
     <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Serialization.cs" />
     <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />

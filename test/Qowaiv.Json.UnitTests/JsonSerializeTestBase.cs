@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions.Extensions;
 using Qowaiv.Identifiers;
 using Qowaiv.Json.UnitTests.Models;
 
@@ -12,66 +12,39 @@ public abstract class JsonSerializeTestBase<TException>  where TException: Excep
 {
     [Test]
     public void Deserialize_Null_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJson>(@"null");
-        Assert.IsNull(obj.Value);
-    }
+        => Deserialize<SvoWithFromJson>(@"null").Should().Be(new SvoWithFromJson(null));
 
     [Test]
     public void Deserialize_NullNullable_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJson?>(@"null");
-        Assert.IsFalse(obj.HasValue);
-    }
+        => Deserialize<SvoWithFromJson?>(@"null").Should().BeNull();
 
     [Test]
     public void Deserialize_NullClass_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJsonClass>(@"null");
-        Assert.IsNull(obj);
-    }
+        => Deserialize<SvoWithFromJsonClass>(@"null").Should().BeNull();
 
     [Test]
     public void Deserialize_String_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJson>(@"""test""");
-        Assert.AreEqual("test", obj.Value);
-    }
+        => Deserialize<SvoWithFromJson>(@"""test""").Should().Be(new SvoWithFromJson("test"));
 
     [Test]
     public void Deserialize_Long_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJson>("666");
-        Assert.AreEqual(666L, obj.Value);
-    }
+        => Deserialize<SvoWithFromJson>("666").Should().Be(new SvoWithFromJson(666L));
 
     [Test]
     public void Deserialize_Double_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJson>("2.5");
-        Assert.AreEqual(2.5, obj.Value);
-    }
+        => Deserialize<SvoWithFromJson>("2.5").Should().Be(new SvoWithFromJson(2.5));
 
     [Test]
     public void Deserialize_True_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJson>("true");
-        Assert.AreEqual(true, obj.Value);
-    }
-    
+        => Deserialize<SvoWithFromJson>("true").Should().Be(new SvoWithFromJson(true));
+        
     [Test]
     public void Deserialize_False_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJson>("false");
-        Assert.AreEqual(false, obj.Value);
-    }
+        => Deserialize<SvoWithFromJson>("false").Should().Be(new SvoWithFromJson(false));
 
     [Test]
     public void Deseralize_SvoWithFromJsonClass_Successful()
-    {
-        var obj = Deserialize<SvoWithFromJsonClass>("2.5");
-        Assert.AreEqual(2.5, obj.Value);
-    }
+        => Deserialize<SvoWithFromJsonClass>("2.5").Value.Should().Be(2.5);
 
     [Test]
     public void Deserialize_Object_Successful()
@@ -79,9 +52,12 @@ public abstract class JsonSerializeTestBase<TException>  where TException: Excep
         var json = @"{ ""Identifier"": 3, ""Svo"": 2017, ""Message"": ""Hello World!"" }";
         var dto = Deserialize<DtoClass>(json);
 
-        Assert.AreEqual(3, dto.Identifier);
-        Assert.AreEqual(new SvoWithFromJson(2017L), dto.Svo);
-        Assert.AreEqual("Hello World!", dto.Message);
+        dto.Should().BeEquivalentTo(new
+        {
+            Identifier = 3,
+            Svo = new SvoWithFromJson(2017L),
+            Message = "Hello World!",
+        });
     }
 
     [Test]
@@ -90,82 +66,58 @@ public abstract class JsonSerializeTestBase<TException>  where TException: Excep
         var json = @"{ ""Identifier"": 3, ""Svo"": null, ""Message"": ""Hello World!"" }";
         var dto = Deserialize<DtoClass>(json);
 
-        Assert.AreEqual(3, dto.Identifier);
-        Assert.AreEqual(default(SvoWithFromJson), dto.Svo);
-        Assert.AreEqual("Hello World!", dto.Message);
+        dto.Should().BeEquivalentTo(new
+        {
+            Identifier = 3,
+            Svo = default(SvoWithFromJson),
+            Message = "Hello World!",
+        });
     }
 
     [Test]
     public void Deserialize_GenericId_Successful()
-    {
-        var id = Deserialize<Id<ForGeneric>>("12");
-        Assert.AreEqual(Id<ForGeneric>.Create(12), id);
-    }
+        => Deserialize<Id<ForGeneric>>("12").Should().Be(Id<ForGeneric>.Create(12));
 
     [Test]
     public void Deserialize_NotSupported_Throws()
-    {
-        var x = Assert.Throws<TException>(() => Deserialize<SvoThatThrows>(@"""test"""));
-        Assert.AreEqual("Value in the wrong format.", x.Message);
-    }
+        => @"""test""".Invoking(Deserialize<SvoThatThrows>)
+            .Should()
+            .Throw<TException>()
+            .WithMessage("Value in the wrong format.");
 
     [Test]
     public void Serialize_Null_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson());
-        Assert.AreEqual("null", json);
-    }
+        => Serialize(new SvoWithFromJson()).Should().Be("null");
 
     [Test]
     public void Serialize_String_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson("test"));
-        Assert.AreEqual(@"""test""", json);
-    }
-
+        => Serialize(new SvoWithFromJson("test")).Should().Be(@"""test""");
+    
     [Test]
     public void Serialize_Double_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson(2.5));
-        Assert.AreEqual(@"2.5", json);
-    }
+        => Serialize(new SvoWithFromJson(2.5)).Should().Be("2.5");
 
     [Test]
     public void Serialize_Long_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson(666L));
-        Assert.AreEqual(@"666", json);
-    }
+        => Serialize(new SvoWithFromJson(666L)).Should().Be("666");
 
     [Test]
     public void Serialize_Boolean_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson(true));
-        Assert.AreEqual(@"true", json);
-    }
+        => Serialize(new SvoWithFromJson(true)).Should().Be("true");
 
     [Test]
     public void Serialize_Decimal_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson(2.5m));
-        Assert.AreEqual(@"2.5", json);
-    }
+        => Serialize(new SvoWithFromJson(2.5m)).Should().Be("2.5");
 
     [Test]
     public void Serialize_GenericId_Successful()
-    {
-        var json = Serialize(Id<ForGeneric>.Create(12));
-        Assert.AreEqual(@"12", json);
-    }
+        => Serialize(Id<ForGeneric>.Create(12)).Should().Be("12");
 
     [Test]
     public virtual void Serialize_DateTime_Successful()
-    {
-        var json = Serialize(new SvoWithFromJson(new DateTime(2017, 06, 11)));
-        Assert.AreEqual(@"""2017-06-11T00:00:00""", json);
-    }
+        => Serialize(new SvoWithFromJson(11.June(2017).AsUtc())).Should().Be(@"""2017-06-11T00:00:00Z""");
 
-    protected abstract T Deserialize<T>(string jsonString);
+    protected abstract T Deserialize<T>(string? jsonString);
 
     protected abstract string Serialize(object obj);
 }

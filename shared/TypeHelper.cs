@@ -54,8 +54,8 @@ internal static class TypeHelper
     {
         [Pure]
         public static bool Is(Type type)
-            => type.GetInterfaces().Any(i => i.FullName == Behavior)
-            && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
+            => type.GetInterfaces().Exists(i => i.FullName == Behavior)
+            && type.GetConstructors().Exists(ctor => !ctor.GetParameters().Any());
 
         public const string Generic = "Qowaiv.Identifiers.Id`1, Qowaiv";
         public const string Behavior = "Qowaiv.Identifiers.IIdentifierBehavior";
@@ -66,7 +66,7 @@ internal static class TypeHelper
         [Pure]
         public static bool Is(Type type)
            => type.BaseTypes().Any(i => i.FullName == Behavior)
-           && type.GetConstructors().Any(ctor => !ctor.GetParameters().Any());
+           && type.GetConstructors().Exists(ctor => !ctor.GetParameters().Any());
 
         public const string Generic = "Qowaiv.Customization.Svo`1, Qowaiv";
         public const string Behavior = "Qowaiv.Customization.SvoBehavior";

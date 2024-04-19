@@ -3,7 +3,9 @@
   <Import Project="..\..\props\package.props" />
   
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <PackageId>Qowaiv.Json.Newtonsoft</PackageId>
     <Version>4.2.0</Version>
     <PackageReleaseNotes>
 v4.2.0
@@ -12,10 +14,11 @@ v4.2.0
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="[13.0.1,)" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\shared\ArrayExtensions.cs" Link="ArrayExtensions.cs" />
     <Compile Include="..\..\shared\ConventionBasedSerializer.Initialize.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Initialize.cs" />
     <Compile Include="..\..\shared\ConventionBasedSerializer.Serialization.cs" Link="Qowaiv.Internals\ConventionBasedSerializer.Serialization.cs" />
     <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />
