@@ -6,7 +6,7 @@ namespace Qowaiv.Json.UnitTests;
 public class TextJsonSerializeTest : JsonSerializeTestBase<JsonException>
 {
     protected override T Deserialize<T>(string? jsonString)
-        => JsonSerializer.Deserialize<T>(jsonString, options);
+        => JsonSerializer.Deserialize<T>(jsonString!, options)!;
 
     protected override string Serialize(object obj)
         => JsonSerializer.Serialize(obj, options);

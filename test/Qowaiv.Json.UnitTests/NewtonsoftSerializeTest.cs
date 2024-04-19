@@ -26,7 +26,7 @@ public class NewtonsoftSerializeTest : JsonSerializeTestBase<JsonSerializationEx
     }
 
     protected override T Deserialize<T>(string? jsonString)
-        => JsonConvert.DeserializeObject<T>(jsonString);
+        => JsonConvert.DeserializeObject<T>(jsonString!)!;
 
     protected override string Serialize(object obj)
         => JsonConvert.SerializeObject(obj);

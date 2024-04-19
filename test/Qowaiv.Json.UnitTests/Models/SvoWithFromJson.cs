@@ -6,19 +6,19 @@ internal readonly struct SvoWithFromJson : System.IEquatable<SvoWithFromJson>
     public object? Value { get; }
 
     /// <summary>Convention based factory method.</summary>
-    public static SvoWithFromJson FromJson(string json) => new SvoWithFromJson(json);
+    public static SvoWithFromJson FromJson(string json) => new(json);
 
     /// <summary>Convention based factory method.</summary>
-    public static SvoWithFromJson FromJson(double json) => new SvoWithFromJson(json);
+    public static SvoWithFromJson FromJson(double json) => new(json);
 
     /// <summary>Convention based factory method.</summary>
-    public static SvoWithFromJson FromJson(long json) => new SvoWithFromJson(json);
+    public static SvoWithFromJson FromJson(long json) => new(json);
 
     /// <summary>Convention based factory method.</summary>
-    public static SvoWithFromJson FromJson(bool json) => new SvoWithFromJson(json);
+    public static SvoWithFromJson FromJson(bool json) => new(json);
 
     /// <summary>Convention based serialization method.</summary>
-    public object ToJson() => Value;
+    public object? ToJson() => Value;
 
     /// <inheritdoc />
     public override bool Equals(object? obj) => obj is SvoWithFromJson other && Equals(other);
@@ -30,5 +30,5 @@ internal readonly struct SvoWithFromJson : System.IEquatable<SvoWithFromJson>
     public override int GetHashCode() => Value is null ? 0 : Value.GetHashCode();
 
     /// <inheritdoc />
-    public override string ToString() => Value?.ToString();
+    public override string ToString() => Value?.ToString() ?? string.Empty;
 }
