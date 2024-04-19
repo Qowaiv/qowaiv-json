@@ -3,6 +3,7 @@ using Qowaiv.Json.UnitTests.TestTools;
 
 namespace Qowaiv.Json.UnitTests;
 
+[Obsolete("Will be dropped with the next major release.")]
 public class BsonConverterRegisterTest
 {
     [Test]
