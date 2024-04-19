@@ -16,6 +16,7 @@
     <LangVersion>12.0</LangVersion>
     <!-- We ship package versions for obsolete target frameworks too -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup Label="Analyzers">

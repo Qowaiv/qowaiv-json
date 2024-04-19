@@ -4,6 +4,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <OutputType>Library</OutputType>
     <Version>4.3.1</Version>
     <PackageIcon>package-icon-bson.png</PackageIcon>
     <PackageReleaseNotes>
