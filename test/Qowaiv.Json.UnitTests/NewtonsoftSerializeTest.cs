@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using NUnit.Framework;
 using Qowaiv.Json.Newtonsoft;
 
 namespace Qowaiv.Json.UnitTests;
@@ -31,13 +30,9 @@ public class NewtonsoftSerializeTest : JsonSerializeTestBase<JsonSerializationEx
         Assert.AreEqual(typeof(QowaivJsonConverter), settings.Converters[0].GetType(), "Default converters should contain a QowaivJsonConverter.");
     }
 
-    protected override T Deserialize<T>(string jsonString)
-    {
-        return JsonConvert.DeserializeObject<T>(jsonString);
-    }
+    protected override T Deserialize<T>(string? jsonString)
+        => JsonConvert.DeserializeObject<T>(jsonString);
 
     protected override string Serialize(object obj)
-    {
-        return JsonConvert.SerializeObject(obj);
-    }
+        => JsonConvert.SerializeObject(obj);
 }

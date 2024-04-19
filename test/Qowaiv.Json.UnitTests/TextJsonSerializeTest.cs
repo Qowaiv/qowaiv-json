@@ -5,15 +5,11 @@ namespace Qowaiv.Json.UnitTests;
 
 public class TextJsonSerializeTest : JsonSerializeTestBase<JsonException>
 {
-    protected override T Deserialize<T>(string jsonString)
-    {
-        return JsonSerializer.Deserialize<T>(jsonString, options);
-    }
+    protected override T Deserialize<T>(string? jsonString)
+        => JsonSerializer.Deserialize<T>(jsonString, options);
 
     protected override string Serialize(object obj)
-    {
-        return JsonSerializer.Serialize(obj, options);
-    }
+        => JsonSerializer.Serialize(obj, options);
 
     private static readonly JsonSerializerOptions options = GetOptions();
 

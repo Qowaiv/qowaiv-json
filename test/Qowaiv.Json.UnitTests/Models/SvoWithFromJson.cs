@@ -2,8 +2,8 @@
 
 internal readonly struct SvoWithFromJson : System.IEquatable<SvoWithFromJson>
 {
-    public SvoWithFromJson(object value) => Value = value;
-    public object Value { get; }
+    public SvoWithFromJson(object? value) => Value = value;
+    public object? Value { get; }
 
     /// <summary>Convention based factory method.</summary>
     public static SvoWithFromJson FromJson(string json) => new SvoWithFromJson(json);
@@ -21,7 +21,7 @@ internal readonly struct SvoWithFromJson : System.IEquatable<SvoWithFromJson>
     public object ToJson() => Value;
 
     /// <inheritdoc />
-    public override bool Equals(object obj) => obj is SvoWithFromJson other && Equals(other);
+    public override bool Equals(object? obj) => obj is SvoWithFromJson other && Equals(other);
     
     /// <inheritdoc />
     public bool Equals(SvoWithFromJson other) => Equals(Value, other.Value);
