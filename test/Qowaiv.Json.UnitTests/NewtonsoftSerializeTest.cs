@@ -7,27 +7,22 @@ public class NewtonsoftSerializeTest : JsonSerializeTestBase<JsonSerializationEx
 {
     public NewtonsoftSerializeTest()
     {
-        if (JsonConvert.DefaultSettings == null)
-        {
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings { Converters = { new QowaivJsonConverter() } };
-        }
+        JsonConvert.DefaultSettings ??= () => new JsonSerializerSettings { Converters = { new QowaivJsonConverter() } };
         QowaivJsonConverter.Register();
     }
 
     [Test]
     public void Register_ClearAll_Successful()
     {
-        var settings = JsonConvert.DefaultSettings.Invoke();
-        settings.Converters.Clear();
+        var settings = JsonConvert.DefaultSettings!.Invoke();
 
-        Assert.AreEqual(0, settings.Converters.Count, "Default converters should be empty.");
+        settings.Converters.Clear();
+        settings.Converters.Should().BeEmpty();
 
         QowaivJsonConverter.Register();
 
         settings = JsonConvert.DefaultSettings.Invoke();
-
-        Assert.AreEqual(1, settings.Converters.Count, "Default converters should contain one converter.");
-        Assert.AreEqual(typeof(QowaivJsonConverter), settings.Converters[0].GetType(), "Default converters should contain a QowaivJsonConverter.");
+        settings.Converters.Single().Should().BeOfType<QowaivJsonConverter>();
     }
 
     protected override T Deserialize<T>(string? jsonString)

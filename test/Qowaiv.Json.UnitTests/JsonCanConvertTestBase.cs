@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-using Qowaiv.Json.UnitTests.Models;
-using System;
+﻿using Qowaiv.Json.UnitTests.Models;
 
 namespace Qowaiv.Json.UnitTests;
 
@@ -11,52 +9,28 @@ namespace Qowaiv.Json.UnitTests;
 public abstract class JsonCanConvertTestBase
 {
     [Test]
-    public void CanConvert_Null_False()
-    {
-        Assert.IsFalse(CanConvert(null));
-    }
+    public void CanConvert_Null_False() => CanConvert(null).Should().BeFalse();
 
     [Test]
-    public void CanConvert_Object_False()
-    {
-        Assert.IsFalse(CanConvert(typeof(object)));
-    }
+    public void CanConvert_Object_False() => CanConvert(typeof(object)).Should().BeFalse();
 
     [Test]
-    public void CanConvert_Int32_False()
-    {
-        Assert.IsFalse(CanConvert(typeof(int)));
-    }
+    public void CanConvert_Int32_False() => CanConvert(typeof(int)).Should().BeFalse();
 
     [Test]
-    public void CanConvert_SvoWithFromJsonBoolOnly_False()
-    {
-        Assert.IsFalse(CanConvert(typeof(SvoWithFromJsonBoolOnly)));
-    }
+    public void CanConvert_SvoWithFromJsonBoolOnly_False() => CanConvert(typeof(SvoWithFromJsonBoolOnly)).Should().BeFalse();
+    
+    [Test]
+    public void CanConvert_SvoWithFromJsonStringOnly_True() => CanConvert(typeof(SvoWithFromJsonStringOnly)).Should().BeTrue();
 
     [Test]
-    public void CanConvert_SvoWithFromJsonStringOnly_True()
-    {
-        Assert.IsTrue(CanConvert(typeof(SvoWithFromJsonStringOnly)));
-    }
+    public void CanConvert_SvoWithFromJson_True() => CanConvert(typeof(SvoWithFromJson)).Should().BeTrue();
 
     [Test]
-    public void CanConvert_SvoWithFromJson_True()
-    {
-        Assert.IsTrue(CanConvert(typeof(SvoWithFromJson)));
-    }
+    public void CanConvert_NullableSvoWithFromJson_True() => CanConvert(typeof(SvoWithFromJson?)).Should().BeTrue();
 
     [Test]
-    public void CanConvert_NullableSvoWithFromJson_True()
-    {
-        Assert.IsTrue(CanConvert(typeof(SvoWithFromJson?)));
-    }
+    public void CanConvert_SvoWithFromJsonClass_True() => CanConvert(typeof(SvoWithFromJsonClass)).Should().BeTrue();
 
-    [Test]
-    public void CanConvert_SvoWithFromJsonClass_True()
-    {
-        Assert.IsTrue(CanConvert(typeof(SvoWithFromJsonClass)));
-    }
-
-    protected abstract bool CanConvert(Type type);
+    protected abstract bool CanConvert(Type? type);
 }
