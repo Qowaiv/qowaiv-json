@@ -4,7 +4,9 @@
   <Import Project="common.props" />
 
   <PropertyGroup>
+    <IsPackable>true</IsPackable>
     <PackageIcon>package-icon.png</PackageIcon>
+    <PackageIconUrl>https://github.com/Qowaiv/qowaiv-json/blob/master/design/package-icon.png</PackageIconUrl>
     <PackageProjectUrl>http://www.github.com/Qowaiv/qowaiv-json</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
@@ -15,6 +17,9 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)..\build\Qowaiv.snk</AssemblyOriginatorKeyFile>
+    <EnablePackageValidation>true</EnablePackageValidation>
+    <PackageValidationBaselineVersion>4.0.0</PackageValidationBaselineVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup Label="Analyzers">

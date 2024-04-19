@@ -1,5 +1,4 @@
 ﻿using Qowaiv.Text.Json.Serialization;
-using System;
 
 namespace Qowaiv.Json.UnitTests;
 
