@@ -15,15 +15,18 @@
   <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="2.*" />
     <PackageReference Include="Newtonsoft.Json" Version="13.*" />
-    <PackageReference Include="Qowaiv" Version="6.*" />
+    <PackageReference Include="Qowaiv" Version="7.*" />
   </ItemGroup>
 
-  <ItemGroup Label="TestTools">
-    <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
-    <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
+  <ItemGroup Label="Test tools">
     <PackageReference Include="FluentAssertions" Version="6.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
     <PackageReference Include="NUnit" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup Label="Build tools">
+    <PackageReference Include="coverlet.collector" Version="*" PrivateAssets="all" />
+    <PackageReference Include="coverlet.msbuild" Version="*" PrivateAssets="all" />
     <PackageReference Include="NUnit3TestAdapter" Version="*" PrivateAssets="all" />
   </ItemGroup>
 
