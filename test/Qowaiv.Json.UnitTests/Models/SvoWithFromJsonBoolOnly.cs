@@ -2,7 +2,7 @@
 
 internal struct SvoWithFromJsonBoolOnly
 {
-    public bool ToJson() => true;
+    public bool ToJson() => this is { };
 
     public static SvoWithFromJsonBoolOnly FromJson(bool _) => default;
 }

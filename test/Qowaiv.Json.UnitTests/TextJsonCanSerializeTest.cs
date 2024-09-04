@@ -4,9 +4,9 @@ namespace Qowaiv.Json.UnitTests;
 
 public class TextJsonCanSerializeTest : JsonCanConvertTestBase
 {
-    protected override bool CanConvert(Type type)
+    protected override bool CanConvert(Type? type)
     {
         var factory = new QowaivJsonConverter();
-        return factory.CanConvert(type);
+        return type is { } &&  factory.CanConvert(type);
     }
 }

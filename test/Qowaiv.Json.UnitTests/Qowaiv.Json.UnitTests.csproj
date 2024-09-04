@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
-  <Import Project="..\..\props\nopackage.props" />
+  <Import Project="../../props/nopackage.props" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\shared\ArrayExtensions.cs" Link="ArrayExtensions.cs" />
-    <Compile Include="..\..\shared\TypeHelper.cs" Link="Qowaiv.Internals\TypeHelper.cs" />
+    <Compile Include="../../shared/ArrayExtensions.cs" Link="ArrayExtensions.cs" />
+    <Compile Include="../../shared/TypeHelper.cs" Link="Qowaiv.Internals/TypeHelper.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,9 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Qowaiv.Bson.MongoDB\Qowaiv.Bson.MongoDB.csproj" />
-    <ProjectReference Include="..\..\src\Qowaiv.Json.Newtonsoft\Qowaiv.Json.Newtonsoft.csproj" />
-    <ProjectReference Include="..\..\src\Qowaiv.Text.Json.Serialization\Qowaiv.Text.Json.Serialization.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Bson.MongoDB/Qowaiv.Bson.MongoDB.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Json.Newtonsoft/Qowaiv.Json.Newtonsoft.csproj" />
+    <ProjectReference Include="../../src/Qowaiv.Text.Json.Serialization/Qowaiv.Text.Json.Serialization.csproj" />
   </ItemGroup>
 
 </Project>
