@@ -3,11 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/Qowaiv/qowaiv-json/blob/master/CODE_OF_CONDUCT.md)
 
-| version                                                                   | package                                                                                        |
-|---------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-|![v](https://img.shields.io/badge/version-4.2.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                |
-|![v](https://img.shields.io/badge/version-4.2.0-blue.svg?cacheSeconds=3600)|[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)|
-|![v](https://img.shields.io/badge/version-4.3.1-blue.svg?cacheSeconds=3600)|[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                      |
+| version                                                                     | downloads                                                           | package                                                                                        |
+|-----------------------------------------------------------------------------|---------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+|![v](https://img.shields.io/nuget/v/Qowaiv.Json.Newtonsoft?color=18C)        |![v](https://img.shields.io/nuget/dt/Qowaiv.Json.Newtonsoft)         |[Qowaiv.Json.Newtonsoft](https://www.nuget.org/packages/Qowaiv.Json.Newtonsoft/)                |
+|![v](https://img.shields.io/nuget/v/Qowaiv.Text.Json.Serialization?color=18C)|![v](https://img.shields.io/nuget/dt/Qowaiv..Text.Json.Serialization)|[Qowaiv.Text.Json.Serialization](https://www.nuget.org/packages/Qowaiv.Text.Json.Serialization/)|
+|![v](https://img.shields.io/nuget/v/Qowaiv.Bson.MongoDB?color=18C)           |![v](https://img.shields.io/nuget/dt/Qowaiv.Bson.MongoDB)            |[Qowaiv.Bson.MongoDB](https://www.nuget.org/packages/Qowaiv.Bson.MongoDB/)                      |
 
 # Qowaiv JSON
 Serializing data using JSON is common practice. However, .NET has no generic

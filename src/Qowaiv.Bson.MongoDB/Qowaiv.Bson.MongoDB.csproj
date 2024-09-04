@@ -48,7 +48,7 @@ v4.0.1
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
+    <PackageReference Include="MongoDB.Bson" Version="[2.28.0,)" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
