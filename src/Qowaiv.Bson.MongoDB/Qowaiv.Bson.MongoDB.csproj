@@ -3,12 +3,15 @@
   <Import Project="..\..\props\package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <PackageId>Qowaiv.Bson.MongoDB</PackageId>
-    <Version>4.3.1</Version>
+    <Version>5.0.0</Version>
     <PackageIcon>package-icon-bson.png</PackageIcon>
     <PackageReleaseNotes>
+      <![CDATA[
+v5.0.0
+- Only support netstandard2.0, net6.0, and net8.0. (BREAKING)
 v4.3.1
 - QowaivBsonSerializationProvider support nullable value-types. #21
 - QowaivBsonSerializationProvider thread-safe. #20
@@ -19,15 +22,13 @@ v4.3.0
 v4.2.0
 - Registered SvoBehavior as Svo&lt;TSvoBehavior&gt;. #13
 - Multi-targeted to netstandard2.0, .NET 5.0, and .NET 6.0. #12
-
 v4.1.0
 - Registered IIdentifierBehavior as Id&lt;TBehavior&gt;. #7
-
 v4.0.2
 - Only register exported.
-
 v4.0.1
 - Fix reading null nodes.
+]]>
     </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -39,12 +40,15 @@ v4.0.1
     <Compile Include="..\..\shared\Guard.cs" Link="Guard.cs" />
     <Compile Include="..\..\shared\ImpureAttribute.cs" Link="Qowaiv.Diagnostics\Contracts\ImpureAttribute.cs" />
     <Compile Include="..\..\shared\InheritableAttribute.cs" Link="Qowaiv.Diagnostics\Contracts\InheritableAttribute.cs" />
-    <None Include="package-icon-bson.png" Pack="true" PackagePath="" />
-    <None Remove="..\..\design\package-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Bson" Version="[2.13.1,)" />
+    <None Remove="..\..\design\package-icon.png" />
+    <None Include="package-icon-bson.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
